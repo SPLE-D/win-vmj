@@ -1,0 +1,114 @@
+package Event.attendeemanagement.core.service;
+import java.util.*;
+import java.lang.*;
+import com.google.gson.Gson;
+import java.util.*;
+import java.util.logging.Logger;
+import java.io.File;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
+import id.ac.ui.cs.prices.winvmj.core.Route;
+import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
+import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import Event.attendeemanagement.AttendeeManagementFactory;
+import Event.attendeemanagement.core.model.AttendeeManagement;
+import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
+//add other required packages
+
+public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComponent{
+
+    public AttendeeManagement createAttendeeManagement(Map<String, Object> requestBody){
+		String attendeeId = (String) requestBody.get("attendeeId");
+		String phoneNumber = (String) requestBody.get("phoneNumber");
+		
+		//to do: fix association attributes
+		
+		AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement("Event.attendeemanagement.core.model.AttendeeManagementImpl", attendeeId, phoneNumber, checkinimpl);
+		Repository.saveObject(attendeemanagement);
+		return attendeemanagement;
+	}
+
+	public AttendeeManagement createAttendeeManagement(Map<String, Object> requestBody, int id){
+		String attendeeId = (String) requestBody.get("attendeeId");
+		String phoneNumber = (String) requestBody.get("phoneNumber");
+		
+		//to do: fix association attributes
+		AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement("Event.attendeemanagement.core.model.AttendeeManagementImpl",attendeeId, phoneNumber, checkinimpl);
+		Repository.saveObject(attendeemanagement);
+		return attendeemanagement;
+	}
+
+    public HashMap<String, Object> updateAttendeeManagement(Map<String, Object> requestBody){
+		String idStr = (String) requestBody.get("");
+		int id = Integer.parseInt(idStr);
+		AttendeeManagement attendeemanagement = Repository.getObject(id);
+		
+		attendeemanagement.setAttendeeId((String) requestBody.get("attendeeId"));
+		attendeemanagement.setPhoneNumber((String) requestBody.get("phoneNumber"));
+		
+		Repository.updateObject(attendeemanagement);
+		
+		//to do: fix association attributes
+		
+		return attendeemanagement.toHashMap();
+		
+	}
+
+    public HashMap<String, Object> getAttendeeManagement(String idStr){
+		int id = Integer.parseInt(idStr);
+		AttendeeManagement attendeemanagement = Repository.getObject(id);
+		return attendeemanagement.toHashMap();
+	}
+
+	public HashMap<String, Object> getAttendeeManagementById(int id){
+		List<HashMap<String, Object>> attendeemanagementList = getAllAttendeeManagement();
+		for (HashMap<String, Object> attendeemanagement : attendeemanagementList){
+			int record_id = ((Double) attendeemanagement.get("")).intValue();
+			if (record_id == id){
+				return attendeemanagement;
+			}
+		}
+		return null;
+	}
+
+    public List<HashMap<String,Object>> getAllAttendeeManagement(){
+		List<AttendeeManagement> List = Repository.getAllObject("attendeemanagement_impl");
+		return transformListToHashMap(List);
+	}
+
+    public List<HashMap<String,Object>> transformListToHashMap(List<AttendeeManagement> List){
+		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
+        for(int i = 0; i < List.size(); i++) {
+            resultList.add(List.get(i).toHashMap());
+        }
+
+        return resultList;
+	}
+
+    public List<HashMap<String,Object>> deleteAttendeeManagement(Map<String, Object> requestBody){
+		String idStr = ((String) requestBody.get(""));
+		int id = Integer.parseInt(idStr);
+		Repository.deleteObject(id);
+		return getAllAttendeeManagement();
+	}
+
+	public void createAttendee() {
+		// TODO: implement this method
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateAttendee() {
+		// TODO: implement this method
+		throw new UnsupportedOperationException();
+	}
+
+	public void deleteAttendee() {
+		// TODO: implement this method
+		throw new UnsupportedOperationException();
+	}
+}

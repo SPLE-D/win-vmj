@@ -1,0 +1,10 @@
+{
+  "UserAuthentication": ["Event.userauthentication.core"],
+  "Checkin": ["Event.checkin.core"],
+  "QRCheckIn": ["Event.checkin.qrcheckin"],
+  "ManualCheckIn": ["Event.checkin.manualcheckin"],
+  "TicketCheckIn": ["Event.checkin.ticketcheckin"],
+  "EventCreation": ["Event.eventcreation.core"],
+  "AttendeeManagement": ["Event.attendeemanagement.core"],
+  "Notification": ["Event.notfication.core"]
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<feature name="EventManager"/>
+	<feature name="UserAuthentication"/>
+	<feature name="CheckIn"/>
+	<feature name="QRCheckIn"/>
+	<feature name="ManualCheckIn"/>
+	<feature name="TicketCheckIn"/>
+	<feature name="EventCreation"/>
+	<feature name="AttendeeManagement"/>
+	<feature name="Payment"/>
+	<feature name="QRIS"/>
+	<feature name="BankTransfer"/>
+	<feature name="SeatSelection"/>
+	<feature name="TicketingSystem"/>
+</configuration>

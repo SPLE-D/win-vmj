@@ -1,0 +1,23 @@
+namespace EventManager
+
+features
+	EventManager
+		mandatory
+			UserAuthentication
+			CheckIn {abstract true}
+				alternative
+					QRCheckIn
+					ManualCheckIn
+					TicketCheckIn
+			EventCreation
+			AttendeeManagement
+		optional
+			Payment
+				or
+					QRIS
+					BankTransfer
+			SeatSelection
+			TicketingSystem
+
+constraints
+	TicketCheckIn => TicketingSystem
