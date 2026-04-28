@@ -16,8 +16,8 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class EventCreationComponent implements EventCreation{
 	@Id
-	protected String EventId; 
-	protected String EventId;
+	protected int eventId; 
+	protected int eventId;
 	public EDate startDate;
 	public EDate endDate;
 	public int capacity;
@@ -32,9 +32,9 @@ public abstract class EventCreationComponent implements EventCreation{
 	} 
 
 	public EventCreationComponent(
-        String EventId, EDate startDate, EDate endDate, int capacity, String name, String location, AttendeeManagementImpl attendeemanagementimpl
+        int eventId, EDate startDate, EDate endDate, int capacity, String name, String location, AttendeeManagementImpl attendeemanagementimpl
     ) {
-        this.EventId = EventId;
+        this.eventId = eventId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.capacity = capacity;
@@ -43,12 +43,12 @@ public abstract class EventCreationComponent implements EventCreation{
         this.attendeemanagementimpl = attendeemanagementimpl;
     }
 
-	public String getEventId() {
-		return this.EventId;
+	public int getEventId() {
+		return this.eventId;
 	}
 
-	public void setEventId(String EventId) {
-		this.EventId = EventId;
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
 	}
 	public abstract EDate getStartDate();
 	public abstract void setStartDate(EDate startDate);
@@ -78,7 +78,7 @@ public abstract class EventCreationComponent implements EventCreation{
 	@Override
     public String toString() {
         return "{" +
-            " EventId='" + getEventId() + "'" +
+            " eventId='" + getEventId() + "'" +
             " startDate='" + getStartDate() + "'" +
             " endDate='" + getEndDate() + "'" +
             " capacity='" + getCapacity() + "'" +

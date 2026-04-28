@@ -5,8 +5,8 @@ import java.util.*;
 import java.lang.*;
 
 public interface AttendeeManagement {
-	    public String getAttendeeId();
-	    public void setAttendeeId(String attendeeId);
+	    public int getAttendeeId();
+	    public void setAttendeeId(int attendeeId);
 	    public String getPhoneNumber();
 	    public void setPhoneNumber(String phoneNumber);
 	    public CheckInImpl getCheckinimpl();

@@ -57,7 +57,7 @@ public class NotificationResourceImpl extends NotificationResourceComponent{
 	
     @Route(url="call/notification/detail")
     public HashMap<String, Object> getNotification(VMJExchange vmjExchange){
-		String idStr = vmjExchange.getGETParam("");
+		String idStr = vmjExchange.getGETParam("id");
 		return notificationServiceImpl.getNotification(idStr);
 	}
 

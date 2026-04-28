@@ -19,24 +19,24 @@ import javax.persistence.OneToMany;
 @Table(name="checkin_impl")
 public class CheckInImpl extends CheckInComponent {
 
-	public CheckInImpl(String checkInId, boolean attended) {
+	public CheckInImpl(int checkInId, boolean attended) {
 		this.checkInId = checkInId;
 		this.attended = attended;
 	}
-
-	public CheckInImpl(String checkInId, boolean attended) {
-		Random r = new Random();
-		this.checkInId = Math.abs(r.nextInt());
-		this.attended = attended;
-	}
+//
+//	public CheckInImpl(int checkInId, boolean attended) {
+//		Random r = new Random();
+//		this.checkInId = Math.abs(r.nextInt());
+//		this.attended = attended;
+//	}
 
 	public CheckInImpl() { }
 
-	public String getCheckInId() {
+	public int getCheckInId() {
 		return this.checkInId;
 	}
 
-	public void setCheckInId(String checkInId) {
+	public void setCheckInId(int checkInId) {
 		this.checkInId = checkInId;
 	}
 	public boolean getAttended() {

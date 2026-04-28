@@ -33,7 +33,7 @@ public class CheckInServiceImpl extends CheckInServiceComponent{
 	}
 
 	public CheckIn createCheckIn(Map<String, Object> requestBody, int id){
-		String checkInId = id;
+		int checkInId = id;
 		boolean attended = (boolean) requestBody.get("attended");
 		
 		//to do: fix association attributes
@@ -47,7 +47,7 @@ public class CheckInServiceImpl extends CheckInServiceComponent{
 		int id = Integer.parseInt(idStr);
 		CheckIn checkin = Repository.getObject(id);
 		
-		checkin.setAttended((String) requestBody.get("attended"));
+		checkin.setAttended((boolean) requestBody.get("attended"));
 		
 		Repository.updateObject(checkin);
 		

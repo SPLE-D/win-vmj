@@ -18,27 +18,27 @@ public abstract class EventCreationDecorator extends EventCreationComponent{
 	public EventCreationDecorator () {
 		super();
 		Random r = new Random();
-		this.EventId = Math.abs(r.nextInt());
+		this.eventId = Math.abs(r.nextInt());
 	}
 
-	public EventCreationDecorator (String EventId, EventCreationComponent record) {
-		this.EventId =  EventId;
+	public EventCreationDecorator (int eventId, EventCreationComponent record) {
+		this.eventId =  eventId;
 		this.record = record;
 	}
 	
 	public EventCreationDecorator (EventCreationComponent record, String objectName) {
 		Random r = new Random();
-		this.EventId = Math.abs(r.nextInt());
+		this.eventId = Math.abs(r.nextInt());
 		this.record = record;
 		this.objectName=objectName;
 	}
 
 
-	public String getEventId() {
+	public int getEventId() {
 		return record.getEventId();
 	}
-	public void setEventId(String EventId) {
-		record.setEventId(EventId);
+	public void setEventId(int eventId) {
+		record.setEventId(eventId);
 	}
 
 	public void createEvent() {

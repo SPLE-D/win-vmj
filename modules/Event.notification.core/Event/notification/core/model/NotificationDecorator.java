@@ -18,22 +18,28 @@ public abstract class NotificationDecorator extends NotificationComponent{
 	public NotificationDecorator () {
 		super();
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
+		this.id = Math.abs(r.nextInt());
 	}
 
-	public NotificationDecorator (, NotificationComponent record) {
-		this. =  ;
+	public NotificationDecorator (int id, NotificationComponent record) {
+		this.id =  id;
 		this.record = record;
 	}
 	
 	public NotificationDecorator (NotificationComponent record, String objectName) {
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
+		this.id = Math.abs(r.nextInt());
 		this.record = record;
 		this.objectName=objectName;
 	}
 
 
+	public int getId() {
+		return record.getId();
+	}
+	public void setId(int id) {
+		record.setId(id);
+	}
 
 	public boolean sendNotification(String content) {
 		return record.sendNotification(content);

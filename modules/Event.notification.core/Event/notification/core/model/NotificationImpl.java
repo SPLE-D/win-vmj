@@ -19,18 +19,26 @@ import javax.persistence.OneToMany;
 @Table(name="notification_impl")
 public class NotificationImpl extends NotificationComponent {
 
-	public NotificationImpl(AttendeeManagementImpl attendeemanagementimpl) {
+	public NotificationImpl(AttendeeManagementImpl attendeemanagementimpl, int id) {
 		this.attendeemanagementimpl = attendeemanagementimpl;
+		this.id = id;
 	}
 
 	public NotificationImpl(AttendeeManagementImpl attendeemanagementimpl) {
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
+		this.id = Math.abs(r.nextInt());
 		this.attendeemanagementimpl = attendeemanagementimpl;
 	}
 
 	public NotificationImpl() { }
 
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public boolean sendNotification(String content) {
 		// TODO: implement this method
@@ -40,6 +48,7 @@ public class NotificationImpl extends NotificationComponent {
 	public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> notificationMap = new HashMap<String,Object>();
 		notificationMap.put("attendeemanagementimpl",getAttendeemanagementimpl());
+		notificationMap.put("id",getId());
 
         return notificationMap;
     }

@@ -57,7 +57,7 @@ public class AttendeeManagementResourceImpl extends AttendeeManagementResourceCo
 	
     @Route(url="call/attendeemanagement/detail")
     public HashMap<String, Object> getAttendeeManagement(VMJExchange vmjExchange){
-		String idStr = vmjExchange.getGETParam("");
+		String idStr = vmjExchange.getGETParam("attendeeId");
 		return attendeemanagementServiceImpl.getAttendeeManagement(idStr);
 	}
 

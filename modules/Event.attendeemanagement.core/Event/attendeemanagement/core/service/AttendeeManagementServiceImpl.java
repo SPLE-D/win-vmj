@@ -23,18 +23,17 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComponent{
 
     public AttendeeManagement createAttendeeManagement(Map<String, Object> requestBody){
-		String attendeeId = (String) requestBody.get("attendeeId");
 		String phoneNumber = (String) requestBody.get("phoneNumber");
 		
 		//to do: fix association attributes
 		
-		AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement("Event.attendeemanagement.core.model.AttendeeManagementImpl", attendeeId, phoneNumber, checkinimpl);
+		AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement("Event.attendeemanagement.core.model.AttendeeManagementImpl", phoneNumber, checkinimpl);
 		Repository.saveObject(attendeemanagement);
 		return attendeemanagement;
 	}
 
 	public AttendeeManagement createAttendeeManagement(Map<String, Object> requestBody, int id){
-		String attendeeId = (String) requestBody.get("attendeeId");
+		int attendeeId = id;
 		String phoneNumber = (String) requestBody.get("phoneNumber");
 		
 		//to do: fix association attributes
@@ -44,11 +43,10 @@ public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComp
 	}
 
     public HashMap<String, Object> updateAttendeeManagement(Map<String, Object> requestBody){
-		String idStr = (String) requestBody.get("");
+		String idStr = (String) requestBody.get("attendeeId");
 		int id = Integer.parseInt(idStr);
 		AttendeeManagement attendeemanagement = Repository.getObject(id);
 		
-		attendeemanagement.setAttendeeId((String) requestBody.get("attendeeId"));
 		attendeemanagement.setPhoneNumber((String) requestBody.get("phoneNumber"));
 		
 		Repository.updateObject(attendeemanagement);
@@ -68,7 +66,7 @@ public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComp
 	public HashMap<String, Object> getAttendeeManagementById(int id){
 		List<HashMap<String, Object>> attendeemanagementList = getAllAttendeeManagement();
 		for (HashMap<String, Object> attendeemanagement : attendeemanagementList){
-			int record_id = ((Double) attendeemanagement.get("")).intValue();
+			int record_id = ((Double) attendeemanagement.get("attendeeId")).intValue();
 			if (record_id == id){
 				return attendeemanagement;
 			}
@@ -91,7 +89,7 @@ public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComp
 	}
 
     public List<HashMap<String,Object>> deleteAttendeeManagement(Map<String, Object> requestBody){
-		String idStr = ((String) requestBody.get(""));
+		String idStr = ((String) requestBody.get("attendeeId"));
 		int id = Integer.parseInt(idStr);
 		Repository.deleteObject(id);
 		return getAllAttendeeManagement();

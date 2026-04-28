@@ -5,8 +5,8 @@ import java.util.*;
 import java.lang.*;
 
 public interface CheckIn {
-	    public String getCheckInId();
-	    public void setCheckInId(String checkInId);
+	    public int getCheckInId();
+	    public void setCheckInId(int checkInId);
 	    public boolean getAttended();
 	    public void setAttended(boolean attended);
 	HashMap<String, Object> toHashMap();

@@ -5,8 +5,8 @@ import java.util.*;
 import java.lang.*;
 
 public interface EventCreation {
-	    public String getEventId();
-	    public void setEventId(String EventId);
+	    public int getEventId();
+	    public void setEventId(int eventId);
 	    public EDate getStartDate();
 	    public void setStartDate(EDate startDate);
 	    public EDate getEndDate();

@@ -19,27 +19,26 @@ import javax.persistence.OneToMany;
 @Table(name="attendeemanagement_impl")
 public class AttendeeManagementImpl extends AttendeeManagementComponent {
 
-	public AttendeeManagementImpl(String attendeeId, String phoneNumber, CheckInImpl checkinimpl) {
+	public AttendeeManagementImpl(int attendeeId, String phoneNumber, CheckInImpl checkinimpl) {
 		this.attendeeId = attendeeId;
 		this.phoneNumber = phoneNumber;
 		this.checkinimpl = checkinimpl;
 	}
 
-	public AttendeeManagementImpl(String attendeeId, String phoneNumber, CheckInImpl checkinimpl) {
+	public AttendeeManagementImpl(int attendeeId, String phoneNumber, CheckInImpl checkinimpl) {
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
-		this.attendeeId = attendeeId;
+		this.attendeeId = Math.abs(r.nextInt());
 		this.phoneNumber = phoneNumber;
 		this.checkinimpl = checkinimpl;
 	}
 
 	public AttendeeManagementImpl() { }
 
-	public String getAttendeeId() {
+	public int getAttendeeId() {
 		return this.attendeeId;
 	}
 
-	public void setAttendeeId(String attendeeId) {
+	public void setAttendeeId(int attendeeId) {
 		this.attendeeId = attendeeId;
 	}
 	public String getPhoneNumber() {

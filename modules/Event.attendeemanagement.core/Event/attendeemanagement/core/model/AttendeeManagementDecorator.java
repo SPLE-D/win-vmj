@@ -18,26 +18,26 @@ public abstract class AttendeeManagementDecorator extends AttendeeManagementComp
 	public AttendeeManagementDecorator () {
 		super();
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
+		this.attendeeId = Math.abs(r.nextInt());
 	}
 
-	public AttendeeManagementDecorator (, AttendeeManagementComponent record) {
-		this. =  ;
+	public AttendeeManagementDecorator (int attendeeId, AttendeeManagementComponent record) {
+		this.attendeeId =  attendeeId;
 		this.record = record;
 	}
 	
 	public AttendeeManagementDecorator (AttendeeManagementComponent record, String objectName) {
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
+		this.attendeeId = Math.abs(r.nextInt());
 		this.record = record;
 		this.objectName=objectName;
 	}
 
 
-	public String getAttendeeId() {
+	public int getAttendeeId() {
 		return record.getAttendeeId();
 	}
-	public void setAttendeeId(String attendeeId) {
+	public void setAttendeeId(int attendeeId) {
 		record.setAttendeeId(attendeeId);
 	}
 	public String getPhoneNumber() {

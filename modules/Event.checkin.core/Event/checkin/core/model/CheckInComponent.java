@@ -16,8 +16,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class CheckInComponent implements CheckIn{
 	@Id
-	protected String checkInId; 
-	protected String checkInId;
+	protected int checkInId;
 	protected boolean attended;
 	protected String objectName = CheckInComponent.class.getName();
 
@@ -26,17 +25,17 @@ public abstract class CheckInComponent implements CheckIn{
 	} 
 
 	public CheckInComponent(
-        String checkInId, boolean attended
+        int checkInId, boolean attended
     ) {
         this.checkInId = checkInId;
         this.attended = attended;
     }
 
-	public String getCheckInId() {
+	public int getCheckInId() {
 		return this.checkInId;
 	}
 
-	public void setCheckInId(String checkInId) {
+	public void setCheckInId(int checkInId) {
 		this.checkInId = checkInId;
 	}
 	public boolean getAttended() {

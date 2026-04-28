@@ -32,15 +32,16 @@ public class NotificationServiceImpl extends NotificationServiceComponent{
 	}
 
 	public Notification createNotification(Map<String, Object> requestBody, int id){
+		int id = id;
 		
 		//to do: fix association attributes
-		Notification notification = NotificationFactory.createNotification("Event.notification.core.model.NotificationImpl",attendeemanagementimpl);
+		Notification notification = NotificationFactory.createNotification("Event.notification.core.model.NotificationImpl",attendeemanagementimpl, id);
 		Repository.saveObject(notification);
 		return notification;
 	}
 
     public HashMap<String, Object> updateNotification(Map<String, Object> requestBody){
-		String idStr = (String) requestBody.get("");
+		String idStr = (String) requestBody.get("id");
 		int id = Integer.parseInt(idStr);
 		Notification notification = Repository.getObject(id);
 		
@@ -62,7 +63,7 @@ public class NotificationServiceImpl extends NotificationServiceComponent{
 	public HashMap<String, Object> getNotificationById(int id){
 		List<HashMap<String, Object>> notificationList = getAllNotification();
 		for (HashMap<String, Object> notification : notificationList){
-			int record_id = ((Double) notification.get("")).intValue();
+			int record_id = ((Double) notification.get("id")).intValue();
 			if (record_id == id){
 				return notification;
 			}
@@ -85,7 +86,7 @@ public class NotificationServiceImpl extends NotificationServiceComponent{
 	}
 
     public List<HashMap<String,Object>> deleteNotification(Map<String, Object> requestBody){
-		String idStr = ((String) requestBody.get(""));
+		String idStr = ((String) requestBody.get("id"));
 		int id = Integer.parseInt(idStr);
 		Repository.deleteObject(id);
 		return getAllNotification();

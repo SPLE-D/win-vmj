@@ -15,7 +15,9 @@ import javax.persistence.Table;
 @Table(name="attendeemanagement_comp")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class AttendeeManagementComponent implements AttendeeManagement{
-	protected String attendeeId;
+	@Id
+	protected int attendeeId; 
+	protected int attendeeId;
 	protected String phoneNumber;
 	@ManyToOne(targetEntity=Event.checkin.core.model.CheckInComponent.class)
 	public CheckIn checkinimpl;
@@ -26,18 +28,18 @@ public abstract class AttendeeManagementComponent implements AttendeeManagement{
 	} 
 
 	public AttendeeManagementComponent(
-        String attendeeId, String phoneNumber, CheckInImpl checkinimpl
+        int attendeeId, String phoneNumber, CheckInImpl checkinimpl
     ) {
         this.attendeeId = attendeeId;
         this.phoneNumber = phoneNumber;
         this.checkinimpl = checkinimpl;
     }
 
-	public String getAttendeeId() {
+	public int getAttendeeId() {
 		return this.attendeeId;
 	}
 
-	public void setAttendeeId(String attendeeId) {
+	public void setAttendeeId(int attendeeId) {
 		this.attendeeId = attendeeId;
 	}
 	public String getPhoneNumber() {

@@ -21,7 +21,7 @@ public abstract class CheckInDecorator extends CheckInComponent{
 		this.checkInId = Math.abs(r.nextInt());
 	}
 
-	public CheckInDecorator (String checkInId, CheckInComponent record) {
+	public CheckInDecorator (int checkInId, CheckInComponent record) {
 		this.checkInId =  checkInId;
 		this.record = record;
 	}
@@ -34,10 +34,10 @@ public abstract class CheckInDecorator extends CheckInComponent{
 	}
 
 
-	public String getCheckInId() {
+	public int getCheckInId() {
 		return record.getCheckInId();
 	}
-	public void setCheckInId(String checkInId) {
+	public void setCheckInId(int checkInId) {
 		record.setCheckInId(checkInId);
 	}
 	public boolean getAttended() {

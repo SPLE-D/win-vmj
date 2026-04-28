@@ -36,20 +36,20 @@ public class EventCreationServiceImpl extends EventCreationServiceComponent{
 	}
 
 	public EventCreation createEventCreation(Map<String, Object> requestBody, int id){
-		String EventId = id;
+		int eventId = id;
 		String capacityStr = (String) requestBody.get("capacity");
 		int capacity = Integer.parseInt(capacityStr);
 		String name = (String) requestBody.get("name");
 		String location = (String) requestBody.get("location");
 		
 		//to do: fix association attributes
-		EventCreation eventcreation = EventCreationFactory.createEventCreation("Event.eventcreation.core.model.EventCreationImpl",EventId, startDate, endDate, capacity, name, location, attendeemanagementimpl);
+		EventCreation eventcreation = EventCreationFactory.createEventCreation("Event.eventcreation.core.model.EventCreationImpl",eventId, startDate, endDate, capacity, name, location, attendeemanagementimpl);
 		Repository.saveObject(eventcreation);
 		return eventcreation;
 	}
 
     public HashMap<String, Object> updateEventCreation(Map<String, Object> requestBody){
-		String idStr = (String) requestBody.get("EventId");
+		String idStr = (String) requestBody.get("eventId");
 		int id = Integer.parseInt(idStr);
 		EventCreation eventcreation = Repository.getObject(id);
 		
@@ -76,7 +76,7 @@ public class EventCreationServiceImpl extends EventCreationServiceComponent{
 	public HashMap<String, Object> getEventCreationById(int id){
 		List<HashMap<String, Object>> eventcreationList = getAllEventCreation();
 		for (HashMap<String, Object> eventcreation : eventcreationList){
-			int record_id = ((Double) eventcreation.get("EventId")).intValue();
+			int record_id = ((Double) eventcreation.get("eventId")).intValue();
 			if (record_id == id){
 				return eventcreation;
 			}
@@ -99,7 +99,7 @@ public class EventCreationServiceImpl extends EventCreationServiceComponent{
 	}
 
     public List<HashMap<String,Object>> deleteEventCreation(Map<String, Object> requestBody){
-		String idStr = ((String) requestBody.get("EventId"));
+		String idStr = ((String) requestBody.get("eventId"));
 		int id = Integer.parseInt(idStr);
 		Repository.deleteObject(id);
 		return getAllEventCreation();

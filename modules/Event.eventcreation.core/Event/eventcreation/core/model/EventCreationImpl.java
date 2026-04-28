@@ -19,8 +19,8 @@ import javax.persistence.OneToMany;
 @Table(name="eventcreation_impl")
 public class EventCreationImpl extends EventCreationComponent {
 
-	public EventCreationImpl(String EventId, EDate startDate, EDate endDate, int capacity, String name, String location, AttendeeManagementImpl attendeemanagementimpl) {
-		this.EventId = EventId;
+	public EventCreationImpl(int eventId, EDate startDate, EDate endDate, int capacity, String name, String location, AttendeeManagementImpl attendeemanagementimpl) {
+		this.eventId = eventId;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.capacity = capacity;
@@ -29,9 +29,9 @@ public class EventCreationImpl extends EventCreationComponent {
 		this.attendeemanagementimpl = attendeemanagementimpl;
 	}
 
-	public EventCreationImpl(String EventId, EDate startDate, EDate endDate, int capacity, String name, String location, AttendeeManagementImpl attendeemanagementimpl) {
+	public EventCreationImpl(int eventId, EDate startDate, EDate endDate, int capacity, String name, String location, AttendeeManagementImpl attendeemanagementimpl) {
 		Random r = new Random();
-		this.EventId = Math.abs(r.nextInt());
+		this.eventId = Math.abs(r.nextInt());
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.capacity = capacity;
@@ -42,12 +42,12 @@ public class EventCreationImpl extends EventCreationComponent {
 
 	public EventCreationImpl() { }
 
-	public String getEventId() {
-		return this.EventId;
+	public int getEventId() {
+		return this.eventId;
 	}
 
-	public void setEventId(String EventId) {
-		this.EventId = EventId;
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
 	}
 
 	public void createEvent() {
@@ -67,7 +67,7 @@ public class EventCreationImpl extends EventCreationComponent {
 	
 	public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> eventcreationMap = new HashMap<String,Object>();
-		eventcreationMap.put("EventId",getEventId());
+		eventcreationMap.put("eventId",getEventId());
 		eventcreationMap.put("startDate",getStartDate());
 		eventcreationMap.put("endDate",getEndDate());
 		eventcreationMap.put("capacity",getCapacity());

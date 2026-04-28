@@ -57,7 +57,7 @@ public class EventCreationResourceImpl extends EventCreationResourceComponent{
 	
     @Route(url="call/eventcreation/detail")
     public HashMap<String, Object> getEventCreation(VMJExchange vmjExchange){
-		String idStr = vmjExchange.getGETParam("EventId");
+		String idStr = vmjExchange.getGETParam("eventId");
 		return eventcreationServiceImpl.getEventCreation(idStr);
 	}
 

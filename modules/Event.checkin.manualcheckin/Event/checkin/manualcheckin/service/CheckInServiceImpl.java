@@ -18,7 +18,8 @@ public class CheckInServiceImpl extends CheckInServiceDecorator {
     }
 
  	public CheckIn createCheckIn(Map<String, Object> requestBody){
-		String checkInId = (String) requestBody.get("checkInId");
+		String checkInIdStr = (String) requestBody.get("checkInId");
+		int checkInId = Integer.parseInt(checkInIdStr);
 		boolean attended = (boolean) requestBody.get("attended");
 		CheckIn checkinmanualcheckin = record.createCheckIn(requestBody);
 		CheckIn checkinmanualcheckindeco = CheckInFactory.createCheckIn("Event.checkin.manualcheckin", checkinmanualcheckin, checkInId, attended);
@@ -28,7 +29,8 @@ public class CheckInServiceImpl extends CheckInServiceDecorator {
 
 	public CheckIn createCheckIn(Map<String, Object> requestBody, int id){
 		CheckIn savedCheckIn = Repository.getObject(id);
-		String checkInId = (String) requestBody.get("checkInId");
+		String checkInIdStr = (String) requestBody.get("checkInId");
+		int checkInId = Integer.parseInt(checkInIdStr);
 		boolean attended = (boolean) requestBody.get("attended");
 		UUID recordCheckInCheckInId = ((CheckInDecorator) savedCheckIn).getCheckInId();
 		CheckIn CheckIn = record.createCheckIn(requestBody, recordCheckInCheckInId);
