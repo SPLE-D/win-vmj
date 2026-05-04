@@ -5,8 +5,7 @@ features
 		mandatory
 			UserAuthentication
 			CheckIn {abstract true}
-				alternative
-					QRCheckIn
+				optional
 					ManualCheckIn
 					TicketCheckIn
 			EventCreation

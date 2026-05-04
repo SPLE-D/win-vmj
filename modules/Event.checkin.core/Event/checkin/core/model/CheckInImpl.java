@@ -23,12 +23,6 @@ public class CheckInImpl extends CheckInComponent {
 		this.checkInId = checkInId;
 		this.attended = attended;
 	}
-//
-//	public CheckInImpl(int checkInId, boolean attended) {
-//		Random r = new Random();
-//		this.checkInId = Math.abs(r.nextInt());
-//		this.attended = attended;
-//	}
 
 	public CheckInImpl() { }
 

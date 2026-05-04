@@ -22,7 +22,7 @@ public class CheckInImpl extends CheckInDecorator {
 	public CheckInImpl() {
         super();
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
+		this.checkInId = Math.abs(r.nextInt());
         this.objectName = CheckInImpl.class.getName();
     }
 
