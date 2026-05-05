@@ -16,9 +16,8 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class NotificationComponent implements Notification{
 	@Id
-	protected int id; 
-	@ManyToOne(targetEntity=Event.attendeemanagement.core.model.AttendeeManagementComponent.class)
-	public AttendeeManagement attendeemanagementimpl;
+	protected int notifiationId; 
+	protected String content;
 	protected String objectName = NotificationComponent.class.getName();
 
 	public NotificationComponent() {
@@ -26,30 +25,34 @@ public abstract class NotificationComponent implements Notification{
 	} 
 
 	public NotificationComponent(
-        AttendeeManagementImpl attendeemanagementimpl, int id
+        int notifiationId, String content
     ) {
-        this.attendeemanagementimpl = attendeemanagementimpl;
-        this.id = id;
+        this.notifiationId = notifiationId;
+        this.content = content;
     }
 
-	public abstract AttendeeManagementImpl getAttendeemanagementimpl();
-	public abstract void setAttendeemanagementimpl(AttendeeManagementImpl attendeemanagementimpl);
-	
-	public int getId() {
-		return this.id;
+	public int getNotifiationId() {
+		return this.notifiationId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setNotifiationId(int notifiationId) {
+		this.notifiationId = notifiationId;
+	}
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
  
-	public abstract boolean sendNotification(String content);
+	public abstract boolean sendNotification();
 
 	@Override
     public String toString() {
         return "{" +
-            " attendeemanagementimpl='" + getAttendeemanagementimpl() + "'" +
-            " id='" + getId() + "'" +
+            " notifiationId='" + getNotifiationId() + "'" +
+            " content='" + getContent() + "'" +
             "}";
     }
 	

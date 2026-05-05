@@ -23,9 +23,4 @@ public abstract class EventCreationServiceComponent implements EventCreationServ
     public abstract List<HashMap<String,Object>> deleteEventCreation(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> getEventCreationById(int id);
 
-	public abstract void createEvent();
-
-	public abstract void updateEvent();
-
-	public abstract void deleteEvent();
 }

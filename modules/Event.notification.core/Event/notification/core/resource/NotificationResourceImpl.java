@@ -57,7 +57,7 @@ public class NotificationResourceImpl extends NotificationResourceComponent{
 	
     @Route(url="call/notification/detail")
     public HashMap<String, Object> getNotification(VMJExchange vmjExchange){
-		String idStr = vmjExchange.getGETParam("id");
+		String idStr = vmjExchange.getGETParam("notifiationId");
 		return notificationServiceImpl.getNotification(idStr);
 	}
 
@@ -81,7 +81,7 @@ public class NotificationResourceImpl extends NotificationResourceComponent{
 
 
 	
-	public boolean sendNotification(String content) {
+	public boolean sendNotification() {
 		// TODO: implement this method
 		throw new UnsupportedOperationException();
 	}

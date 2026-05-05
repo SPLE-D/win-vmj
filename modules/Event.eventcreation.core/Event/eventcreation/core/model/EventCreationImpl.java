@@ -19,17 +19,7 @@ import javax.persistence.OneToMany;
 @Table(name="eventcreation_impl")
 public class EventCreationImpl extends EventCreationComponent {
 
-	public EventCreationImpl(int eventId, EDate startDate, EDate endDate, int capacity, String name, String location, AttendeeManagementImpl attendeemanagementimpl) {
-		this.eventId = eventId;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.capacity = capacity;
-		this.name = name;
-		this.location = location;
-		this.attendeemanagementimpl = attendeemanagementimpl;
-	}
-
-	public EventCreationImpl(int eventId, EDate startDate, EDate endDate, int capacity, String name, String location, AttendeeManagementImpl attendeemanagementimpl) {
+	public EventCreationImpl(int eventId, int startDate, int endDate, int capacity, String name, String location) {
 		Random r = new Random();
 		this.eventId = Math.abs(r.nextInt());
 		this.startDate = startDate;
@@ -37,7 +27,6 @@ public class EventCreationImpl extends EventCreationComponent {
 		this.capacity = capacity;
 		this.name = name;
 		this.location = location;
-		this.attendeemanagementimpl = attendeemanagementimpl;
 	}
 
 	public EventCreationImpl() { }
@@ -49,21 +38,42 @@ public class EventCreationImpl extends EventCreationComponent {
 	public void setEventId(int eventId) {
 		this.eventId = eventId;
 	}
-
-	public void createEvent() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
+	public int getStartDate() {
+		return this.startDate;
 	}
 
-	public void updateEvent() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
+	public void setStartDate(int startDate) {
+		this.startDate = startDate;
+	}
+	public int getEndDate() {
+		return this.endDate;
 	}
 
-	public void deleteEvent() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
+	public void setEndDate(int endDate) {
+		this.endDate = endDate;
 	}
+	public int getCapacity() {
+		return this.capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	
 	public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> eventcreationMap = new HashMap<String,Object>();
@@ -73,7 +83,6 @@ public class EventCreationImpl extends EventCreationComponent {
 		eventcreationMap.put("capacity",getCapacity());
 		eventcreationMap.put("name",getName());
 		eventcreationMap.put("location",getLocation());
-		eventcreationMap.put("attendeemanagementimpl",getAttendeemanagementimpl());
 
         return eventcreationMap;
     }

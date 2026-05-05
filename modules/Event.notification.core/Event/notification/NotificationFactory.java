@@ -1,7 +1,6 @@
 package Event.notification;
 
 import Event.notification.core.model.Notification;
-import Event.notification.core.model.invalid;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 

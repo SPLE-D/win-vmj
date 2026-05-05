@@ -23,9 +23,4 @@ public abstract class AttendeeManagementServiceComponent implements AttendeeMana
     public abstract List<HashMap<String,Object>> deleteAttendeeManagement(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> getAttendeeManagementById(int id);
 
-	public abstract void createAttendee();
-
-	public abstract void updateAttendee();
-
-	public abstract void deleteAttendee();
 }

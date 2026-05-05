@@ -18,9 +18,4 @@ public abstract class AttendeeManagementResourceComponent implements AttendeeMan
     public abstract List<HashMap<String,Object>> getAllAttendeeManagement(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> deleteAttendeeManagement(VMJExchange vmjExchange);
 
-	public abstract void createAttendee();
-
-	public abstract void updateAttendee();
-
-	public abstract void deleteAttendee();
 }

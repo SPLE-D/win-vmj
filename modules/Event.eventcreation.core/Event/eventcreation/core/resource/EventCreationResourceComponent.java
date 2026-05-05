@@ -18,9 +18,4 @@ public abstract class EventCreationResourceComponent implements EventCreationRes
     public abstract List<HashMap<String,Object>> getAllEventCreation(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> deleteEventCreation(VMJExchange vmjExchange);
 
-	public abstract void createEvent();
-
-	public abstract void updateEvent();
-
-	public abstract void deleteEvent();
 }

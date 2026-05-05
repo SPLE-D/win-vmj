@@ -7,17 +7,15 @@ import java.lang.*;
 public interface EventCreation {
 	    public int getEventId();
 	    public void setEventId(int eventId);
-	    public EDate getStartDate();
-	    public void setStartDate(EDate startDate);
-	    public EDate getEndDate();
-	    public void setEndDate(EDate endDate);
+	    public int getStartDate();
+	    public void setStartDate(int startDate);
+	    public int getEndDate();
+	    public void setEndDate(int endDate);
 	    public int getCapacity();
 	    public void setCapacity(int capacity);
 	    public String getName();
 	    public void setName(String name);
 	    public String getLocation();
 	    public void setLocation(String location);
-	    public AttendeeManagementImpl getAttendeemanagementimpl();
-	    public void setAttendeemanagementimpl(AttendeeManagementImpl attendeemanagementimpl);
 	HashMap<String, Object> toHashMap();
 }

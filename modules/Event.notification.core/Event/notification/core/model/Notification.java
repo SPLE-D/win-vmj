@@ -5,9 +5,9 @@ import java.util.*;
 import java.lang.*;
 
 public interface Notification {
-	    public AttendeeManagementImpl getAttendeemanagementimpl();
-	    public void setAttendeemanagementimpl(AttendeeManagementImpl attendeemanagementimpl);
-	    public int getId();
-	    public void setId(int id);
+	    public int getNotifiationId();
+	    public void setNotifiationId(int notifiationId);
+	    public String getContent();
+	    public void setContent(String content);
 	HashMap<String, Object> toHashMap();
 }

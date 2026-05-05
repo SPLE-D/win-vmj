@@ -80,21 +80,4 @@ public class EventCreationResourceImpl extends EventCreationResourceComponent{
 	}
 
 
-	
-	public void createEvent() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
-
-	
-	public void updateEvent() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
-
-	
-	public void deleteEvent() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
 }

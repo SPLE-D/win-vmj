@@ -24,10 +24,11 @@ public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComp
 
     public AttendeeManagement createAttendeeManagement(Map<String, Object> requestBody){
 		String phoneNumber = (String) requestBody.get("phoneNumber");
+		String email = (String) requestBody.get("email");
 		
 		//to do: fix association attributes
 		
-		AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement("Event.attendeemanagement.core.model.AttendeeManagementImpl", phoneNumber, checkinimpl);
+		AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement("Event.attendeemanagement.core.model.AttendeeManagementImpl", phoneNumber, email);
 		Repository.saveObject(attendeemanagement);
 		return attendeemanagement;
 	}
@@ -35,9 +36,10 @@ public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComp
 	public AttendeeManagement createAttendeeManagement(Map<String, Object> requestBody, int id){
 		int attendeeId = id;
 		String phoneNumber = (String) requestBody.get("phoneNumber");
+		String email = (String) requestBody.get("email");
 		
 		//to do: fix association attributes
-		AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement("Event.attendeemanagement.core.model.AttendeeManagementImpl",attendeeId, phoneNumber, checkinimpl);
+		AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement("Event.attendeemanagement.core.model.AttendeeManagementImpl",attendeeId, phoneNumber, email);
 		Repository.saveObject(attendeemanagement);
 		return attendeemanagement;
 	}
@@ -48,6 +50,7 @@ public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComp
 		AttendeeManagement attendeemanagement = Repository.getObject(id);
 		
 		attendeemanagement.setPhoneNumber((String) requestBody.get("phoneNumber"));
+		attendeemanagement.setEmail((String) requestBody.get("email"));
 		
 		Repository.updateObject(attendeemanagement);
 		
@@ -95,18 +98,4 @@ public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComp
 		return getAllAttendeeManagement();
 	}
 
-	public void createAttendee() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateAttendee() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
-
-	public void deleteAttendee() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
 }

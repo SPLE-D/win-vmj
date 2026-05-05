@@ -9,7 +9,7 @@ public interface AttendeeManagement {
 	    public void setAttendeeId(int attendeeId);
 	    public String getPhoneNumber();
 	    public void setPhoneNumber(String phoneNumber);
-	    public CheckInImpl getCheckinimpl();
-	    public void setCheckinimpl(CheckInImpl checkinimpl);
+	    public String getEmail();
+	    public void setEmail(String email);
 	HashMap<String, Object> toHashMap();
 }

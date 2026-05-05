@@ -1,5 +1,4 @@
 module Event.eventcreation.core {
-	requires Event.attendeemanagement.core;
 	exports Event.eventcreation;
 	exports Event.eventcreation.core.model;
 	exports Event.eventcreation.core.resource;

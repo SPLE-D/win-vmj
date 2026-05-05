@@ -17,10 +17,8 @@ import javax.persistence.Table;
 public abstract class AttendeeManagementComponent implements AttendeeManagement{
 	@Id
 	protected int attendeeId; 
-	protected int attendeeId;
 	protected String phoneNumber;
-	@ManyToOne(targetEntity=Event.checkin.core.model.CheckInComponent.class)
-	public CheckIn checkinimpl;
+	protected String email;
 	protected String objectName = AttendeeManagementComponent.class.getName();
 
 	public AttendeeManagementComponent() {
@@ -28,11 +26,11 @@ public abstract class AttendeeManagementComponent implements AttendeeManagement{
 	} 
 
 	public AttendeeManagementComponent(
-        int attendeeId, String phoneNumber, CheckInImpl checkinimpl
+        int attendeeId, String phoneNumber, String email
     ) {
         this.attendeeId = attendeeId;
         this.phoneNumber = phoneNumber;
-        this.checkinimpl = checkinimpl;
+        this.email = email;
     }
 
 	public int getAttendeeId() {
@@ -49,22 +47,21 @@ public abstract class AttendeeManagementComponent implements AttendeeManagement{
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public abstract CheckInImpl getCheckinimpl();
-	public abstract void setCheckinimpl(CheckInImpl checkinimpl);
-	
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
  
-	public abstract void createAttendee();
-
-	public abstract void updateAttendee();
-
-	public abstract void deleteAttendee();
 
 	@Override
     public String toString() {
         return "{" +
             " attendeeId='" + getAttendeeId() + "'" +
             " phoneNumber='" + getPhoneNumber() + "'" +
-            " checkinimpl='" + getCheckinimpl() + "'" +
+            " email='" + getEmail() + "'" +
             "}";
     }
 	

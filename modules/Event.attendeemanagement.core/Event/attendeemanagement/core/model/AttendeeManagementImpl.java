@@ -19,17 +19,11 @@ import javax.persistence.OneToMany;
 @Table(name="attendeemanagement_impl")
 public class AttendeeManagementImpl extends AttendeeManagementComponent {
 
-	public AttendeeManagementImpl(int attendeeId, String phoneNumber, CheckInImpl checkinimpl) {
-		this.attendeeId = attendeeId;
-		this.phoneNumber = phoneNumber;
-		this.checkinimpl = checkinimpl;
-	}
-
-	public AttendeeManagementImpl(int attendeeId, String phoneNumber, CheckInImpl checkinimpl) {
+	public AttendeeManagementImpl(int attendeeId, String phoneNumber, String email) {
 		Random r = new Random();
 		this.attendeeId = Math.abs(r.nextInt());
 		this.phoneNumber = phoneNumber;
-		this.checkinimpl = checkinimpl;
+		this.email = email;
 	}
 
 	public AttendeeManagementImpl() { }
@@ -48,27 +42,20 @@ public class AttendeeManagementImpl extends AttendeeManagementComponent {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
-	public void createAttendee() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
+	public String getEmail() {
+		return this.email;
 	}
 
-	public void updateAttendee() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public void deleteAttendee() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
 	
 	public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> attendeemanagementMap = new HashMap<String,Object>();
 		attendeemanagementMap.put("attendeeId",getAttendeeId());
 		attendeemanagementMap.put("phoneNumber",getPhoneNumber());
-		attendeemanagementMap.put("checkinimpl",getCheckinimpl());
+		attendeemanagementMap.put("email",getEmail());
 
         return attendeemanagementMap;
     }

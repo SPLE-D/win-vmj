@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class CheckInComponent implements CheckIn{
 	@Id
-	protected int checkInId;
+	protected int checkInId; 
 	protected boolean attended;
 	protected String objectName = CheckInComponent.class.getName();
 

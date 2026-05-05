@@ -23,28 +23,31 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 public class NotificationServiceImpl extends NotificationServiceComponent{
 
     public Notification createNotification(Map<String, Object> requestBody){
+		String content = (String) requestBody.get("content");
 		
 		//to do: fix association attributes
 		
-		Notification notification = NotificationFactory.createNotification("Event.notification.core.model.NotificationImpl", attendeemanagementimpl);
+		Notification notification = NotificationFactory.createNotification("Event.notification.core.model.NotificationImpl", content);
 		Repository.saveObject(notification);
 		return notification;
 	}
 
 	public Notification createNotification(Map<String, Object> requestBody, int id){
-		int id = id;
+		int notifiationId = id;
+		String content = (String) requestBody.get("content");
 		
 		//to do: fix association attributes
-		Notification notification = NotificationFactory.createNotification("Event.notification.core.model.NotificationImpl",attendeemanagementimpl, id);
+		Notification notification = NotificationFactory.createNotification("Event.notification.core.model.NotificationImpl",notifiationId, content);
 		Repository.saveObject(notification);
 		return notification;
 	}
 
     public HashMap<String, Object> updateNotification(Map<String, Object> requestBody){
-		String idStr = (String) requestBody.get("id");
+		String idStr = (String) requestBody.get("notifiationId");
 		int id = Integer.parseInt(idStr);
 		Notification notification = Repository.getObject(id);
 		
+		notification.setContent((String) requestBody.get("content"));
 		
 		Repository.updateObject(notification);
 		
@@ -63,7 +66,7 @@ public class NotificationServiceImpl extends NotificationServiceComponent{
 	public HashMap<String, Object> getNotificationById(int id){
 		List<HashMap<String, Object>> notificationList = getAllNotification();
 		for (HashMap<String, Object> notification : notificationList){
-			int record_id = ((Double) notification.get("id")).intValue();
+			int record_id = ((Double) notification.get("notifiationId")).intValue();
 			if (record_id == id){
 				return notification;
 			}
@@ -86,13 +89,13 @@ public class NotificationServiceImpl extends NotificationServiceComponent{
 	}
 
     public List<HashMap<String,Object>> deleteNotification(Map<String, Object> requestBody){
-		String idStr = ((String) requestBody.get("id"));
+		String idStr = ((String) requestBody.get("notifiationId"));
 		int id = Integer.parseInt(idStr);
 		Repository.deleteObject(id);
 		return getAllNotification();
 	}
 
-	public boolean sendNotification(String content) {
+	public boolean sendNotification() {
 		// TODO: implement this method
 		throw new UnsupportedOperationException();
 	}

@@ -80,21 +80,4 @@ public class AttendeeManagementResourceImpl extends AttendeeManagementResourceCo
 	}
 
 
-	
-	public void createAttendee() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
-
-	
-	public void updateAttendee() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
-
-	
-	public void deleteAttendee() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
 }

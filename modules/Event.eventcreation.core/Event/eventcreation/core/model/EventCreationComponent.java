@@ -17,14 +17,11 @@ import javax.persistence.Table;
 public abstract class EventCreationComponent implements EventCreation{
 	@Id
 	protected int eventId; 
-	protected int eventId;
-	public EDate startDate;
-	public EDate endDate;
-	public int capacity;
-	public String name;
-	public String location;
-	@ManyToOne(targetEntity=Event.attendeemanagement.core.model.AttendeeManagementComponent.class)
-	public AttendeeManagement attendeemanagementimpl;
+	protected int startDate;
+	protected int endDate;
+	protected int capacity;
+	protected String name;
+	protected String location;
 	protected String objectName = EventCreationComponent.class.getName();
 
 	public EventCreationComponent() {
@@ -32,7 +29,7 @@ public abstract class EventCreationComponent implements EventCreation{
 	} 
 
 	public EventCreationComponent(
-        int eventId, EDate startDate, EDate endDate, int capacity, String name, String location, AttendeeManagementImpl attendeemanagementimpl
+        int eventId, int startDate, int endDate, int capacity, String name, String location
     ) {
         this.eventId = eventId;
         this.startDate = startDate;
@@ -40,7 +37,6 @@ public abstract class EventCreationComponent implements EventCreation{
         this.capacity = capacity;
         this.name = name;
         this.location = location;
-        this.attendeemanagementimpl = attendeemanagementimpl;
     }
 
 	public int getEventId() {
@@ -50,30 +46,42 @@ public abstract class EventCreationComponent implements EventCreation{
 	public void setEventId(int eventId) {
 		this.eventId = eventId;
 	}
-	public abstract EDate getStartDate();
-	public abstract void setStartDate(EDate startDate);
-	
-	public abstract EDate getEndDate();
-	public abstract void setEndDate(EDate endDate);
-	
-	public abstract int getCapacity();
-	public abstract void setCapacity(int capacity);
-	
-	public abstract String getName();
-	public abstract void setName(String name);
-	
-	public abstract String getLocation();
-	public abstract void setLocation(String location);
-	
-	public abstract AttendeeManagementImpl getAttendeemanagementimpl();
-	public abstract void setAttendeemanagementimpl(AttendeeManagementImpl attendeemanagementimpl);
-	
+	public int getStartDate() {
+		return this.startDate;
+	}
+
+	public void setStartDate(int startDate) {
+		this.startDate = startDate;
+	}
+	public int getEndDate() {
+		return this.endDate;
+	}
+
+	public void setEndDate(int endDate) {
+		this.endDate = endDate;
+	}
+	public int getCapacity() {
+		return this.capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
  
-	public abstract void createEvent();
-
-	public abstract void updateEvent();
-
-	public abstract void deleteEvent();
 
 	@Override
     public String toString() {
@@ -84,7 +92,6 @@ public abstract class EventCreationComponent implements EventCreation{
             " capacity='" + getCapacity() + "'" +
             " name='" + getName() + "'" +
             " location='" + getLocation() + "'" +
-            " attendeemanagementimpl='" + getAttendeemanagementimpl() + "'" +
             "}";
     }
 	

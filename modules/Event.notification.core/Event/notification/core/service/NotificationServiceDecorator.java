@@ -44,7 +44,7 @@ public abstract class NotificationServiceDecorator extends NotificationServiceCo
         return record.getNotificationById(id);
     }
 
-	public boolean sendNotification(String content) {
-		return record.sendNotification(content);
+	public boolean sendNotification() {
+		return record.sendNotification();
 	}
 }

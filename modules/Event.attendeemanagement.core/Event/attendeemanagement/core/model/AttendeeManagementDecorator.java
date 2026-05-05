@@ -46,18 +46,13 @@ public abstract class AttendeeManagementDecorator extends AttendeeManagementComp
 	public void setPhoneNumber(String phoneNumber) {
 		record.setPhoneNumber(phoneNumber);
 	}
-
-	public void createAttendee() {
-		return record.createAttendee();
+	public String getEmail() {
+		return record.getEmail();
+	}
+	public void setEmail(String email) {
+		record.setEmail(email);
 	}
 
-	public void updateAttendee() {
-		return record.updateAttendee();
-	}
-
-	public void deleteAttendee() {
-		return record.deleteAttendee();
-	}
 
 	public HashMap<String, Object> toHashMap() {
         return this.record.toHashMap();

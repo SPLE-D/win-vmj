@@ -1,7 +1,6 @@
 package Event.eventcreation;
 
 import Event.eventcreation.core.model.EventCreation;
-import Event.eventcreation.core.model.invalid;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 

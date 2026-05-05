@@ -40,7 +40,7 @@ public abstract class NotificationResourceDecorator extends NotificationResource
 		return record.deleteNotification(vmjExchange);
 	}
 
-	public boolean sendNotification(String content) {
-		return record.sendNotification(content);
+	public boolean sendNotification() {
+		return record.sendNotification();
 	}
 }

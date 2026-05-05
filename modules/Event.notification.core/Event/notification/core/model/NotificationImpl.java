@@ -19,36 +19,38 @@ import javax.persistence.OneToMany;
 @Table(name="notification_impl")
 public class NotificationImpl extends NotificationComponent {
 
-	public NotificationImpl(AttendeeManagementImpl attendeemanagementimpl, int id) {
-		this.attendeemanagementimpl = attendeemanagementimpl;
-		this.id = id;
-	}
-
-	public NotificationImpl(AttendeeManagementImpl attendeemanagementimpl) {
+	public NotificationImpl(int notifiationId, String content) {
 		Random r = new Random();
-		this.id = Math.abs(r.nextInt());
-		this.attendeemanagementimpl = attendeemanagementimpl;
+		this.notifiationId = Math.abs(r.nextInt());
+		this.content = content;
 	}
 
 	public NotificationImpl() { }
 
-	public int getId() {
-		return this.id;
+	public int getNotifiationId() {
+		return this.notifiationId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setNotifiationId(int notifiationId) {
+		this.notifiationId = notifiationId;
+	}
+	public String getContent() {
+		return this.content;
 	}
 
-	public boolean sendNotification(String content) {
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public boolean sendNotification() {
 		// TODO: implement this method
 		throw new UnsupportedOperationException();
 	}
 	
 	public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> notificationMap = new HashMap<String,Object>();
-		notificationMap.put("attendeemanagementimpl",getAttendeemanagementimpl());
-		notificationMap.put("id",getId());
+		notificationMap.put("notifiationId",getNotifiationId());
+		notificationMap.put("content",getContent());
 
         return notificationMap;
     }

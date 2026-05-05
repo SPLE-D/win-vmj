@@ -1,5 +1,4 @@
 module Event.notification.core {
-	requires Event.attendeemanagement.core;
 	exports Event.notification;
 	exports Event.notification.core.model;
 	exports Event.notification.core.resource;

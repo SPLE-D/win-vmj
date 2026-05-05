@@ -23,6 +23,10 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 public class EventCreationServiceImpl extends EventCreationServiceComponent{
 
     public EventCreation createEventCreation(Map<String, Object> requestBody){
+		String startDateStr = (String) requestBody.get("startDate");
+		int startDate = Integer.parseInt(startDateStr);
+		String endDateStr = (String) requestBody.get("endDate");
+		int endDate = Integer.parseInt(endDateStr);
 		String capacityStr = (String) requestBody.get("capacity");
 		int capacity = Integer.parseInt(capacityStr);
 		String name = (String) requestBody.get("name");
@@ -30,20 +34,24 @@ public class EventCreationServiceImpl extends EventCreationServiceComponent{
 		
 		//to do: fix association attributes
 		
-		EventCreation eventcreation = EventCreationFactory.createEventCreation("Event.eventcreation.core.model.EventCreationImpl", startDate, endDate, capacity, name, location, attendeemanagementimpl);
+		EventCreation eventcreation = EventCreationFactory.createEventCreation("Event.eventcreation.core.model.EventCreationImpl", startDate, endDate, capacity, name, location);
 		Repository.saveObject(eventcreation);
 		return eventcreation;
 	}
 
 	public EventCreation createEventCreation(Map<String, Object> requestBody, int id){
 		int eventId = id;
+		String startDateStr = (String) requestBody.get("startDate");
+		int startDate = Integer.parseInt(startDateStr);
+		String endDateStr = (String) requestBody.get("endDate");
+		int endDate = Integer.parseInt(endDateStr);
 		String capacityStr = (String) requestBody.get("capacity");
 		int capacity = Integer.parseInt(capacityStr);
 		String name = (String) requestBody.get("name");
 		String location = (String) requestBody.get("location");
 		
 		//to do: fix association attributes
-		EventCreation eventcreation = EventCreationFactory.createEventCreation("Event.eventcreation.core.model.EventCreationImpl",eventId, startDate, endDate, capacity, name, location, attendeemanagementimpl);
+		EventCreation eventcreation = EventCreationFactory.createEventCreation("Event.eventcreation.core.model.EventCreationImpl",eventId, startDate, endDate, capacity, name, location);
 		Repository.saveObject(eventcreation);
 		return eventcreation;
 	}
@@ -52,6 +60,12 @@ public class EventCreationServiceImpl extends EventCreationServiceComponent{
 		String idStr = (String) requestBody.get("eventId");
 		int id = Integer.parseInt(idStr);
 		EventCreation eventcreation = Repository.getObject(id);
+		
+		String startDateStr = (String) requestBody.get("startDate");
+		eventcreation.setStartDate(Integer.parseInt(startDateStr));
+		
+		String endDateStr = (String) requestBody.get("endDate");
+		eventcreation.setEndDate(Integer.parseInt(endDateStr));
 		
 		String capacityStr = (String) requestBody.get("capacity");
 		eventcreation.setCapacity(Integer.parseInt(capacityStr));
@@ -105,18 +119,4 @@ public class EventCreationServiceImpl extends EventCreationServiceComponent{
 		return getAllEventCreation();
 	}
 
-	public void createEvent() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateEvent() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
-
-	public void deleteEvent() {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
-	}
 }

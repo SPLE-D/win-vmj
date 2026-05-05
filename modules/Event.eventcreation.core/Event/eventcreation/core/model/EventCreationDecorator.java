@@ -40,18 +40,37 @@ public abstract class EventCreationDecorator extends EventCreationComponent{
 	public void setEventId(int eventId) {
 		record.setEventId(eventId);
 	}
-
-	public void createEvent() {
-		return record.createEvent();
+	public int getStartDate() {
+		return record.getStartDate();
+	}
+	public void setStartDate(int startDate) {
+		record.setStartDate(startDate);
+	}
+	public int getEndDate() {
+		return record.getEndDate();
+	}
+	public void setEndDate(int endDate) {
+		record.setEndDate(endDate);
+	}
+	public int getCapacity() {
+		return record.getCapacity();
+	}
+	public void setCapacity(int capacity) {
+		record.setCapacity(capacity);
+	}
+	public String getName() {
+		return record.getName();
+	}
+	public void setName(String name) {
+		record.setName(name);
+	}
+	public String getLocation() {
+		return record.getLocation();
+	}
+	public void setLocation(String location) {
+		record.setLocation(location);
 	}
 
-	public void updateEvent() {
-		return record.updateEvent();
-	}
-
-	public void deleteEvent() {
-		return record.deleteEvent();
-	}
 
 	public HashMap<String, Object> toHashMap() {
         return this.record.toHashMap();

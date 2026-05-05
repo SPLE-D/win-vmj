@@ -40,15 +40,4 @@ public abstract class AttendeeManagementResourceDecorator extends AttendeeManage
 		return record.deleteAttendeeManagement(vmjExchange);
 	}
 
-	public void createAttendee() {
-		return record.createAttendee();
-	}
-
-	public void updateAttendee() {
-		return record.updateAttendee();
-	}
-
-	public void deleteAttendee() {
-		return record.deleteAttendee();
-	}
 }

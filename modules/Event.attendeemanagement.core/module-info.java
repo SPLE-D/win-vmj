@@ -1,5 +1,4 @@
 module Event.attendeemanagement.core {
-	requires Event.checkin.core;
 	exports Event.attendeemanagement;
 	exports Event.attendeemanagement.core.model;
 	exports Event.attendeemanagement.core.resource;

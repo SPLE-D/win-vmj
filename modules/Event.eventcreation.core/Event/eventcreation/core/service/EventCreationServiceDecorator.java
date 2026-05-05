@@ -44,15 +44,4 @@ public abstract class EventCreationServiceDecorator extends EventCreationService
         return record.getEventCreationById(id);
     }
 
-	public void createEvent() {
-		return record.createEvent();
-	}
-
-	public void updateEvent() {
-		return record.updateEvent();
-	}
-
-	public void deleteEvent() {
-		return record.deleteEvent();
-	}
 }

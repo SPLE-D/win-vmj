@@ -23,5 +23,5 @@ public abstract class NotificationServiceComponent implements NotificationServic
     public abstract List<HashMap<String,Object>> deleteNotification(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> getNotificationById(int id);
 
-	public abstract boolean sendNotification(String content);
+	public abstract boolean sendNotification();
 }

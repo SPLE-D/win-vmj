@@ -1,7 +1,6 @@
 package Event.attendeemanagement;
 
 import Event.attendeemanagement.core.model.AttendeeManagement;
-import Event.attendeemanagement.core.model.invalid;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 

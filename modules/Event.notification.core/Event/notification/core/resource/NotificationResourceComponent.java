@@ -18,5 +18,5 @@ public abstract class NotificationResourceComponent implements NotificationResou
     public abstract List<HashMap<String,Object>> getAllNotification(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> deleteNotification(VMJExchange vmjExchange);
 
-	public abstract boolean sendNotification(String content);
+	public abstract boolean sendNotification();
 }
