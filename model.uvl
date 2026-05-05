@@ -3,20 +3,21 @@ namespace EventManager
 features
 	EventManager
 		mandatory
-			UserAuthentication
+			Report
+			Review
 			CheckIn {abstract true}
-				optional
+				alternative
 					ManualCheckIn
 					TicketCheckIn
 			EventCreation
 			AttendeeManagement
 		optional
+			TicketingSystem
 			Payment
 				or
 					QRIS
 					BankTransfer
-			SeatSelection
-			TicketingSystem
+			Notification
 
 constraints
 	TicketCheckIn => TicketingSystem

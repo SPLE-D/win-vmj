@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
 	<feature automatic="selected" name="EventManager"/>
-	<feature automatic="selected" name="UserAuthentication"/>
+	<feature name="Report"/>
+	<feature name="Review"/>
 	<feature automatic="selected" name="CheckIn"/>
-	<feature manual="selected" name="QRCheckIn"/>
 	<feature automatic="unselected" name="ManualCheckIn"/>
 	<feature automatic="unselected" name="TicketCheckIn"/>
 	<feature automatic="selected" name="EventCreation"/>
 	<feature automatic="selected" name="AttendeeManagement"/>
+	<feature name="TicketingSystem"/>
 	<feature name="Payment"/>
 	<feature name="QRIS"/>
 	<feature name="BankTransfer"/>
-	<feature name="SeatSelection"/>
-	<feature name="TicketingSystem"/>
+	<feature name="Notification"/>
 </configuration>
