@@ -22,21 +22,34 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 
 public class EventCreationServiceImpl extends EventCreationServiceComponent{
 
-    public EventCreation createEventCreation(Map<String, Object> requestBody){
-		String startDateStr = (String) requestBody.get("startDate");
-		int startDate = Integer.parseInt(startDateStr);
-		String endDateStr = (String) requestBody.get("endDate");
-		int endDate = Integer.parseInt(endDateStr);
-		String capacityStr = (String) requestBody.get("capacity");
-		int capacity = Integer.parseInt(capacityStr);
-		String name = (String) requestBody.get("name");
-		String location = (String) requestBody.get("location");
-		
-		//to do: fix association attributes
-		
-		EventCreation eventcreation = EventCreationFactory.createEventCreation("Event.eventcreation.core.model.EventCreationImpl", startDate, endDate, capacity, name, location);
-		Repository.saveObject(eventcreation);
-		return eventcreation;
+	public EventCreation createEventCreation(Map<String, Object> requestBody){
+	    Random r = new Random();
+	    int eventId = Math.abs(r.nextInt());
+
+	    String startDateStr = (String) requestBody.get("startDate");
+	    int startDate = Integer.parseInt(startDateStr);
+
+	    String endDateStr = (String) requestBody.get("endDate");
+	    int endDate = Integer.parseInt(endDateStr);
+
+	    String capacityStr = (String) requestBody.get("capacity");
+	    int capacity = Integer.parseInt(capacityStr);
+
+	    String name = (String) requestBody.get("name");
+	    String location = (String) requestBody.get("location");
+
+	    EventCreation eventcreation = EventCreationFactory.createEventCreation(
+	        "Event.eventcreation.core.model.EventCreationImpl",
+	        eventId,
+	        startDate,
+	        endDate,
+	        capacity,
+	        name,
+	        location
+	    );
+
+	    Repository.saveObject(eventcreation);
+	    return eventcreation;
 	}
 
 	public EventCreation createEventCreation(Map<String, Object> requestBody, int id){
@@ -90,7 +103,7 @@ public class EventCreationServiceImpl extends EventCreationServiceComponent{
 	public HashMap<String, Object> getEventCreationById(int id){
 		List<HashMap<String, Object>> eventcreationList = getAllEventCreation();
 		for (HashMap<String, Object> eventcreation : eventcreationList){
-			int record_id = ((Double) eventcreation.get("eventId")).intValue();
+			int record_id = ((Number) eventcreation.get("eventId")).intValue();
 			if (record_id == id){
 				return eventcreation;
 			}

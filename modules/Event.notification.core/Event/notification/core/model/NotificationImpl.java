@@ -20,9 +20,8 @@ import javax.persistence.OneToMany;
 public class NotificationImpl extends NotificationComponent {
 
 	public NotificationImpl(int notifiationId, String content) {
-		Random r = new Random();
-		this.notifiationId = Math.abs(r.nextInt());
-		this.content = content;
+	    this.notifiationId = notifiationId;
+	    this.content = content;
 	}
 
 	public NotificationImpl() { }

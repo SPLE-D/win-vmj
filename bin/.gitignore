@@ -1,3 +1,7 @@
 /Event.attendeemanagement.core/
+/Event.checkin.core/
 /Event.eventcreation.core/
-/eventmanager.product.default/
+/Event.notification.core/
+/Event.report.core/
+/Event.review.core/
+/eventmanager.product.notifiedeo/

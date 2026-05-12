@@ -20,13 +20,12 @@ import javax.persistence.OneToMany;
 public class EventCreationImpl extends EventCreationComponent {
 
 	public EventCreationImpl(int eventId, int startDate, int endDate, int capacity, String name, String location) {
-		Random r = new Random();
-		this.eventId = Math.abs(r.nextInt());
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.capacity = capacity;
-		this.name = name;
-		this.location = location;
+	    this.eventId = eventId;
+	    this.startDate = startDate;
+	    this.endDate = endDate;
+	    this.capacity = capacity;
+	    this.name = name;
+	    this.location = location;
 	}
 
 	public EventCreationImpl() { }

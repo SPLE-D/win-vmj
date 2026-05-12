@@ -20,9 +20,8 @@ import javax.persistence.OneToMany;
 public class CheckInImpl extends CheckInComponent {
 
 	public CheckInImpl(int checkInId, boolean attended) {
-		Random r = new Random();
-		this.checkInId = Math.abs(r.nextInt());
-		this.attended = attended;
+	    this.checkInId = checkInId;
+	    this.attended = attended;
 	}
 
 	public CheckInImpl() { }

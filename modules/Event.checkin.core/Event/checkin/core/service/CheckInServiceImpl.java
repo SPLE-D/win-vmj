@@ -22,14 +22,20 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 
 public class CheckInServiceImpl extends CheckInServiceComponent{
 
-    public CheckIn createCheckIn(Map<String, Object> requestBody){
-		boolean attended = (boolean) requestBody.get("attended");
-		
-		//to do: fix association attributes
-		
-		CheckIn checkin = CheckInFactory.createCheckIn("Event.checkin.core.model.CheckInImpl", attended);
-		Repository.saveObject(checkin);
-		return checkin;
+	public CheckIn createCheckIn(Map<String, Object> requestBody){
+	    Random r = new Random();
+	    int checkInId = Math.abs(r.nextInt());
+
+	    boolean attended = (boolean) requestBody.get("attended");
+
+	    CheckIn checkin = CheckInFactory.createCheckIn(
+	        "Event.checkin.core.model.CheckInImpl",
+	        checkInId,
+	        attended
+	    );
+
+	    Repository.saveObject(checkin);
+	    return checkin;
 	}
 
 	public CheckIn createCheckIn(Map<String, Object> requestBody, int id){
@@ -66,7 +72,7 @@ public class CheckInServiceImpl extends CheckInServiceComponent{
 	public HashMap<String, Object> getCheckInById(int id){
 		List<HashMap<String, Object>> checkinList = getAllCheckIn();
 		for (HashMap<String, Object> checkin : checkinList){
-			int record_id = ((Double) checkin.get("checkInId")).intValue();
+			int record_id = ((Number) checkin.get("checkInId")).intValue();
 			if (record_id == id){
 				return checkin;
 			}

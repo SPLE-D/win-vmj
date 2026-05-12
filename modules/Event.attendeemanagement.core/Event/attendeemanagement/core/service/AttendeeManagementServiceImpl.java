@@ -22,15 +22,22 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 
 public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComponent{
 
-    public AttendeeManagement createAttendeeManagement(Map<String, Object> requestBody){
-		String phoneNumber = (String) requestBody.get("phoneNumber");
-		String email = (String) requestBody.get("email");
-		
-		//to do: fix association attributes
-		
-		AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement("Event.attendeemanagement.core.model.AttendeeManagementImpl", phoneNumber, email);
-		Repository.saveObject(attendeemanagement);
-		return attendeemanagement;
+	public AttendeeManagement createAttendeeManagement(Map<String, Object> requestBody){
+	    Random r = new Random();
+	    int attendeeId = Math.abs(r.nextInt());
+
+	    String phoneNumber = (String) requestBody.get("phoneNumber");
+	    String email = (String) requestBody.get("email");
+
+	    AttendeeManagement attendeemanagement = AttendeeManagementFactory.createAttendeeManagement(
+	        "Event.attendeemanagement.core.model.AttendeeManagementImpl",
+	        attendeeId,
+	        phoneNumber,
+	        email
+	    );
+
+	    Repository.saveObject(attendeemanagement);
+	    return attendeemanagement;
 	}
 
 	public AttendeeManagement createAttendeeManagement(Map<String, Object> requestBody, int id){
@@ -69,7 +76,7 @@ public class AttendeeManagementServiceImpl extends AttendeeManagementServiceComp
 	public HashMap<String, Object> getAttendeeManagementById(int id){
 		List<HashMap<String, Object>> attendeemanagementList = getAllAttendeeManagement();
 		for (HashMap<String, Object> attendeemanagement : attendeemanagementList){
-			int record_id = ((Double) attendeemanagement.get("attendeeId")).intValue();
+			int record_id = ((Number) attendeemanagement.get("attendeeId")).intValue();
 			if (record_id == id){
 				return attendeemanagement;
 			}
