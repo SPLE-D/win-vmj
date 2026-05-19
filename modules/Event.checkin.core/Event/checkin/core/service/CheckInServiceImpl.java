@@ -15,35 +15,32 @@ import java.nio.charset.StandardCharsets;
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import id.ac.ui.cs.prices.winvmj.hibernate.RepositoryUtil;
 import Event.checkin.CheckInFactory;
 import Event.checkin.core.model.CheckIn;
+import Event.attendeemanagement.core.model.AttendeeManagement;
+import Event.attendeemanagement.core.model.AttendeeManagementComponent;
 import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 //add other required packages
 
 public class CheckInServiceImpl extends CheckInServiceComponent{
 
-	public CheckIn createCheckIn(Map<String, Object> requestBody){
-	    Random r = new Random();
-	    int checkInId = Math.abs(r.nextInt());
-
-	    boolean attended = (boolean) requestBody.get("attended");
-
-	    CheckIn checkin = CheckInFactory.createCheckIn(
-	        "Event.checkin.core.model.CheckInImpl",
-	        checkInId,
-	        attended
-	    );
-
-	    Repository.saveObject(checkin);
-	    return checkin;
+    public CheckIn createCheckIn(Map<String, Object> requestBody){
+		boolean attended = parseBoolean(requestBody.get("attended"));
+		
+		AttendeeManagement attendeemanagementimpl = getAttendeeManagement(requestBody);
+		
+		CheckIn checkin = CheckInFactory.createCheckIn("Event.checkin.core.model.CheckInImpl", attended, attendeemanagementimpl);
+		Repository.saveObject(checkin);
+		return checkin;
 	}
 
 	public CheckIn createCheckIn(Map<String, Object> requestBody, int id){
 		int checkInId = id;
-		boolean attended = (boolean) requestBody.get("attended");
+		boolean attended = parseBoolean(requestBody.get("attended"));
 		
-		//to do: fix association attributes
-		CheckIn checkin = CheckInFactory.createCheckIn("Event.checkin.core.model.CheckInImpl",checkInId, attended);
+		AttendeeManagement attendeemanagementimpl = getAttendeeManagement(requestBody);
+		CheckIn checkin = CheckInFactory.createCheckIn("Event.checkin.core.model.CheckInImpl",checkInId, attended, attendeemanagementimpl);
 		Repository.saveObject(checkin);
 		return checkin;
 	}
@@ -53,11 +50,14 @@ public class CheckInServiceImpl extends CheckInServiceComponent{
 		int id = Integer.parseInt(idStr);
 		CheckIn checkin = Repository.getObject(id);
 		
-		checkin.setAttended((boolean) requestBody.get("attended"));
-		
+		checkin.setAttended(parseBoolean(requestBody.get("attended")));
+
+		AttendeeManagement attendeemanagementimpl = getAttendeeManagement(requestBody);
+		if (attendeemanagementimpl != null) {
+			checkin.setAttendeemanagementimpl(attendeemanagementimpl);
+		}
+
 		Repository.updateObject(checkin);
-		
-		//to do: fix association attributes
 		
 		return checkin.toHashMap();
 		
@@ -104,5 +104,43 @@ public class CheckInServiceImpl extends CheckInServiceComponent{
 	public boolean checkIn() {
 		// TODO: implement this method
 		throw new UnsupportedOperationException();
+	}
+
+	private AttendeeManagement getAttendeeManagement(Map<String, Object> requestBody) {
+		Object attendeeIdValue = requestBody.get("attendeeId");
+		if (attendeeIdValue == null) {
+			attendeeIdValue = requestBody.get("attendeemanagementimpl");
+		}
+		if (attendeeIdValue == null) {
+			return null;
+		}
+		if (attendeeIdValue instanceof AttendeeManagement) {
+			return (AttendeeManagement) attendeeIdValue;
+		}
+		if (attendeeIdValue instanceof Map<?, ?>) {
+			attendeeIdValue = ((Map<?, ?>) attendeeIdValue).get("attendeeId");
+		}
+		if (attendeeIdValue == null) {
+			return null;
+		}
+
+		int attendeeId = parseInt(attendeeIdValue);
+		RepositoryUtil<AttendeeManagement> attendeeRepository =
+			new RepositoryUtil<AttendeeManagement>(AttendeeManagementComponent.class);
+		return attendeeRepository.getObject(attendeeId);
+	}
+
+	private int parseInt(Object value) {
+		if (value instanceof Number) {
+			return ((Number) value).intValue();
+		}
+		return Integer.parseInt(String.valueOf(value));
+	}
+
+	private boolean parseBoolean(Object value) {
+		if (value instanceof Boolean) {
+			return ((Boolean) value).booleanValue();
+		}
+		return Boolean.parseBoolean(String.valueOf(value));
 	}
 }

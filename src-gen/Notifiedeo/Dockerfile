@@ -12,13 +12,15 @@ COPY . .
 RUN gradle compileJava copyDependencies --no-daemon
 
 # Stage 2: Runtime
-FROM eclipse-temurin:17-jre-alpine
+# Use a non-Alpine Temurin image; alpine variants are not published for all platforms
+FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-# Create non-root user
-RUN addgroup -g 1001 winvmj && \
-    adduser -u 1001 -G winvmj -s /bin/sh -D winvmj
+# Create non-root user (Debian-compatible)
+# Use groupadd/useradd; tolerate existing user/group with `|| true`
+RUN groupadd -g 1001 winvmj || true && \
+    useradd -u 1001 -g winvmj -s /bin/sh -m -d /home/winvmj winvmj || true
 
 # Copy everything from project folder
 COPY . .

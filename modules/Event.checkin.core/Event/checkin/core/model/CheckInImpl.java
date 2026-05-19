@@ -13,15 +13,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import Event.attendeemanagement.core.model.AttendeeManagement;
 
 
 @Entity(name="checkin_impl")
 @Table(name="checkin_impl")
 public class CheckInImpl extends CheckInComponent {
 
-	public CheckInImpl(int checkInId, boolean attended) {
-	    this.checkInId = checkInId;
-	    this.attended = attended;
+	public CheckInImpl(int checkInId, boolean attended, AttendeeManagement attendeemanagementimpl) {
+		this.checkInId = checkInId;
+		this.attended = attended;
+		this.attendeemanagementimpl = attendeemanagementimpl;
+	}
+
+	public CheckInImpl(boolean attended, AttendeeManagement attendeemanagementimpl) {
+		Random r = new Random();
+		this.checkInId = Math.abs(r.nextInt());
+		this.attended = attended;
+		this.attendeemanagementimpl = attendeemanagementimpl;
 	}
 
 	public CheckInImpl() { }
@@ -40,6 +49,13 @@ public class CheckInImpl extends CheckInComponent {
 	public void setAttended(boolean attended) {
 		this.attended = attended;
 	}
+	public AttendeeManagement getAttendeemanagementimpl() {
+		return this.attendeemanagementimpl;
+	}
+
+	public void setAttendeemanagementimpl(AttendeeManagement attendeemanagementimpl) {
+		this.attendeemanagementimpl = attendeemanagementimpl;
+	}
 
 	public boolean checkIn() {
 		// TODO: implement this method
@@ -50,6 +66,7 @@ public class CheckInImpl extends CheckInComponent {
         HashMap<String, Object> checkinMap = new HashMap<String,Object>();
 		checkinMap.put("checkInId",getCheckInId());
 		checkinMap.put("attended",getAttended());
+		checkinMap.put("attendeemanagementimpl",getAttendeemanagementimpl());
 
         return checkinMap;
     }

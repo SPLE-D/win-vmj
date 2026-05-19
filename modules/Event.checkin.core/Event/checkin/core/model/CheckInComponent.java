@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import Event.attendeemanagement.core.model.AttendeeManagement;
 
 @Entity
 @Table(name="checkin_comp")
@@ -18,6 +20,8 @@ public abstract class CheckInComponent implements CheckIn{
 	@Id
 	protected int checkInId; 
 	protected boolean attended;
+	@ManyToOne(targetEntity=Event.attendeemanagement.core.model.AttendeeManagementComponent.class)
+	public AttendeeManagement attendeemanagementimpl;
 	protected String objectName = CheckInComponent.class.getName();
 
 	public CheckInComponent() {
@@ -25,10 +29,11 @@ public abstract class CheckInComponent implements CheckIn{
 	} 
 
 	public CheckInComponent(
-        int checkInId, boolean attended
+        int checkInId, boolean attended, AttendeeManagement attendeemanagementimpl
     ) {
         this.checkInId = checkInId;
         this.attended = attended;
+        this.attendeemanagementimpl = attendeemanagementimpl;
     }
 
 	public int getCheckInId() {
@@ -45,6 +50,9 @@ public abstract class CheckInComponent implements CheckIn{
 	public void setAttended(boolean attended) {
 		this.attended = attended;
 	}
+	public abstract AttendeeManagement getAttendeemanagementimpl();
+	public abstract void setAttendeemanagementimpl(AttendeeManagement attendeemanagementimpl);
+	
  
 	public abstract boolean checkIn();
 
@@ -53,6 +61,7 @@ public abstract class CheckInComponent implements CheckIn{
         return "{" +
             " checkInId='" + getCheckInId() + "'" +
             " attended='" + getAttended() + "'" +
+            " attendeemanagementimpl='" + getAttendeemanagementimpl() + "'" +
             "}";
     }
 	

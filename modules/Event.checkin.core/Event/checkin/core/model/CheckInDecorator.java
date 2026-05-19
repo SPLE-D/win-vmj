@@ -8,6 +8,7 @@ import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import javax.persistence.OneToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.CascadeType;
+import Event.attendeemanagement.core.model.AttendeeManagement;
 //add other required packages
 
 @MappedSuperclass
@@ -45,6 +46,13 @@ public abstract class CheckInDecorator extends CheckInComponent{
 	}
 	public void setAttended(boolean attended) {
 		record.setAttended(attended);
+	}
+	public AttendeeManagement getAttendeemanagementimpl() {
+		return record.getAttendeemanagementimpl();
+	}
+
+	public void setAttendeemanagementimpl(AttendeeManagement attendeemanagementimpl) {
+		record.setAttendeemanagementimpl(attendeemanagementimpl);
 	}
 
 	public boolean checkIn() {

@@ -2,15 +2,15 @@
 <configuration>
 	<feature automatic="selected" name="EventManager"/>
 	<feature automatic="selected" name="Report"/>
-	<feature name="PriorityReport"/>
+	<feature manual="selected" name="PriorityReport"/>
 	<feature automatic="selected" name="Review"/>
 	<feature name="AnonymousReview"/>
 	<feature automatic="selected" name="CheckIn"/>
-	<feature name="TimeStampCheckIn"/>
+	<feature manual="selected" name="TimeStampCheckIn"/>
 	<feature automatic="selected" name="EventCreation"/>
-	<feature name="TypeEventCreation"/>
+	<feature manual="selected" name="TypeEventCreation"/>
 	<feature automatic="selected" name="AttendeeManagement"/>
 	<feature name="ClassAttendeeManagement"/>
-	<feature name="Notification"/>
+	<feature automatic="selected" name="Notification"/>
 	<feature name="TargetedNotification"/>
 </configuration>
