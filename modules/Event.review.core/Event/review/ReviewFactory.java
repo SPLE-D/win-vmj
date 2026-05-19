@@ -1,6 +1,7 @@
 package Event.review;
 
 import Event.review.core.model.Review;
+import Event.review.core.model.ReviewImpl;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 
