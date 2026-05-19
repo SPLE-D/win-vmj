@@ -15,8 +15,8 @@ import javax.persistence.Table;
 @Table(name="report_comp")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class ReportComponent implements Report{
-	@Id
-	protected int reportId; 
+	@Id 
+	protected int reportId;
 	protected int eventId;
 	protected int totalAttendee;
 	protected int totalRevenue;
