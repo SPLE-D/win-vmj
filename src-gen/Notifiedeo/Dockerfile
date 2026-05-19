@@ -12,8 +12,8 @@ COPY . .
 RUN gradle compileJava copyDependencies --no-daemon
 
 # Stage 2: Runtime
-# Use a non-Alpine Temurin image; alpine variants are not published for all platforms
-FROM eclipse-temurin:17-jre
+# Use Java 21 runtime to match classes compiled with class file version 65.0
+FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
