@@ -20,9 +20,10 @@ import javax.persistence.OneToMany;
 public class AttendeeManagementImpl extends AttendeeManagementComponent {
 
 	public AttendeeManagementImpl(int attendeeId, String phoneNumber, String email) {
-	    this.attendeeId = attendeeId;
-	    this.phoneNumber = phoneNumber;
-	    this.email = email;
+		Random r = new Random();
+		this.attendeeId = Math.abs(r.nextInt());
+		this.phoneNumber = phoneNumber;
+		this.email = email;
 	}
 
 	public AttendeeManagementImpl() { }

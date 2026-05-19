@@ -11,6 +11,6 @@
 	<feature name="TypeEventCreation"/>
 	<feature automatic="selected" name="AttendeeManagement"/>
 	<feature name="ClassAttendeeManagement"/>
-	<feature name="Notification"/>
+	<feature automatic="selected" name="Notification"/>
 	<feature name="TargetedNotification"/>
 </configuration>
