@@ -20,7 +20,6 @@ public class ReviewImpl extends ReviewDecorator {
 	public boolean anonymous;
 	public ReviewImpl() {
         super();
-		Random r = new Random();
         this.objectName = ReviewImpl.class.getName();
     }
 
@@ -34,9 +33,12 @@ public class ReviewImpl extends ReviewDecorator {
 	    return this.anonymous;
 	}
 
+	public void setAnonymous(boolean anonymous) {
+	    this.anonymous = anonymous;
+	}
+
 	public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> map = record.toHashMap();
-        map.put("reviewId", reviewId);
 		map.put("anonymous", getAnonymous());
 
         return map;

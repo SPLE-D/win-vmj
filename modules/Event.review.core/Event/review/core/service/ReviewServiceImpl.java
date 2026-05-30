@@ -23,29 +23,25 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 public class ReviewServiceImpl extends ReviewServiceComponent{
 
     public Review createReview(Map<String, Object> requestBody){
-		String eventIdStr = (String) requestBody.get("eventId");
-		int eventId = Integer.parseInt(eventIdStr);
-		String attendeeIdStr = (String) requestBody.get("attendeeId");
-		int attendeeId = Integer.parseInt(attendeeIdStr);
-		String ratingStr = (String) requestBody.get("rating");
-		int rating = Integer.parseInt(ratingStr);
+		Random r = new Random();
+		int reviewId = Math.abs(r.nextInt());
+		int eventId = parseIntValue(requestBody.get("eventId"), "eventId");
+		int attendeeId = parseIntValue(requestBody.get("attendeeId"), "attendeeId");
+		int rating = parseIntValue(requestBody.get("rating"), "rating");
 		String comment = (String) requestBody.get("comment");
 		
 		//to do: fix association attributes
 		
-		Review review = ReviewFactory.createReview("Event.review.core.model.ReviewImpl", eventId, attendeeId, rating, comment);
+		Review review = ReviewFactory.createReview("Event.review.core.model.ReviewImpl", reviewId, eventId, attendeeId, rating, comment);
 		Repository.saveObject(review);
 		return review;
 	}
 
 	public Review createReview(Map<String, Object> requestBody, int id){
 		int reviewId = id;
-		String eventIdStr = (String) requestBody.get("eventId");
-		int eventId = Integer.parseInt(eventIdStr);
-		String attendeeIdStr = (String) requestBody.get("attendeeId");
-		int attendeeId = Integer.parseInt(attendeeIdStr);
-		String ratingStr = (String) requestBody.get("rating");
-		int rating = Integer.parseInt(ratingStr);
+		int eventId = parseIntValue(requestBody.get("eventId"), "eventId");
+		int attendeeId = parseIntValue(requestBody.get("attendeeId"), "attendeeId");
+		int rating = parseIntValue(requestBody.get("rating"), "rating");
 		String comment = (String) requestBody.get("comment");
 		
 		//to do: fix association attributes
@@ -55,18 +51,14 @@ public class ReviewServiceImpl extends ReviewServiceComponent{
 	}
 
     public HashMap<String, Object> updateReview(Map<String, Object> requestBody){
-		String idStr = (String) requestBody.get("reviewId");
-		int id = Integer.parseInt(idStr);
+		int id = parseIntValue(requestBody.get("reviewId"), "reviewId");
 		Review review = Repository.getObject(id);
 		
-		String eventIdStr = (String) requestBody.get("eventId");
-		review.setEventId(Integer.parseInt(eventIdStr));
+		review.setEventId(parseIntValue(requestBody.get("eventId"), "eventId"));
 		
-		String attendeeIdStr = (String) requestBody.get("attendeeId");
-		review.setAttendeeId(Integer.parseInt(attendeeIdStr));
+		review.setAttendeeId(parseIntValue(requestBody.get("attendeeId"), "attendeeId"));
 		
-		String ratingStr = (String) requestBody.get("rating");
-		review.setRating(Integer.parseInt(ratingStr));
+		review.setRating(parseIntValue(requestBody.get("rating"), "rating"));
 		
 		review.setComment((String) requestBody.get("comment"));
 		
@@ -79,7 +71,7 @@ public class ReviewServiceImpl extends ReviewServiceComponent{
 	}
 
     public HashMap<String, Object> getReview(String idStr){
-		int id = Integer.parseInt(idStr);
+		int id = parseIntValue(idStr, "reviewId");
 		Review review = Repository.getObject(id);
 		return review.toHashMap();
 	}
@@ -87,7 +79,7 @@ public class ReviewServiceImpl extends ReviewServiceComponent{
 	public HashMap<String, Object> getReviewById(int id){
 		List<HashMap<String, Object>> reviewList = getAllReview();
 		for (HashMap<String, Object> review : reviewList){
-			int record_id = ((Double) review.get("reviewId")).intValue();
+			int record_id = ((Number) review.get("reviewId")).intValue();
 			if (record_id == id){
 				return review;
 			}
@@ -110,10 +102,25 @@ public class ReviewServiceImpl extends ReviewServiceComponent{
 	}
 
     public List<HashMap<String,Object>> deleteReview(Map<String, Object> requestBody){
-		String idStr = ((String) requestBody.get("reviewId"));
-		int id = Integer.parseInt(idStr);
+		int id = parseIntValue(requestBody.get("reviewId"), "reviewId");
 		Repository.deleteObject(id);
 		return getAllReview();
+	}
+
+	private int parseIntValue(Object value, String fieldName) {
+		if (value == null) {
+			throw new IllegalArgumentException(fieldName + " is required");
+		}
+
+		if (value instanceof Number) {
+			return ((Number) value).intValue();
+		}
+
+		if (value instanceof String) {
+			return Integer.parseInt((String) value);
+		}
+
+		throw new IllegalArgumentException("Invalid integer value for " + fieldName + ": " + value);
 	}
 
 }

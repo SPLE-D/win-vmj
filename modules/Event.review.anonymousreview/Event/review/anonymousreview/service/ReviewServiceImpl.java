@@ -3,13 +3,9 @@ package Event.review.anonymousreview.service;
 import java.util.*;
 import java.lang.*;
 
-import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
-
 import Event.review.core.service.ReviewServiceDecorator;
-import Event.review.core.model.ReviewImpl;
 import Event.review.core.service.ReviewServiceComponent;
 import Event.review.core.model.Review;
-import Event.review.core.model.ReviewDecorator;
 import Event.review.ReviewFactory;
 
 public class ReviewServiceImpl extends ReviewServiceDecorator {
@@ -18,14 +14,7 @@ public class ReviewServiceImpl extends ReviewServiceDecorator {
     }
 
  	public Review createReview(Map<String, Object> requestBody){
-		boolean anonymous = (boolean) requestBody.get("anonymous");
-		String eventIdStr = (String) requestBody.get("eventId");
-		int eventId = Integer.parseInt(eventIdStr);
-		String attendeeIdStr = (String) requestBody.get("attendeeId");
-		int attendeeId = Integer.parseInt(attendeeIdStr);
-		String ratingStr = (String) requestBody.get("rating");
-		int rating = Integer.parseInt(ratingStr);
-		String comment = (String) requestBody.get("comment");
+		boolean anonymous = parseBooleanValue(requestBody.get("anonymous"));
 		Review reviewanonymousreview = record.createReview(requestBody);
 		Review reviewanonymousreviewdeco = ReviewFactory.createReview("Event.review.anonymousreview.model.ReviewImpl", reviewanonymousreview, anonymous);
 		Repository.saveObject(reviewanonymousreviewdeco);
@@ -33,38 +22,38 @@ public class ReviewServiceImpl extends ReviewServiceDecorator {
 	}
 
 	public Review createReview(Map<String, Object> requestBody, int id){
-		Review savedReview = Repository.getObject(id);
-		boolean anonymous = (boolean) requestBody.get("anonymous");
-		int recordReviewReviewId = ((ReviewDecorator) savedReview).getReviewId();
-		Review review = record.createReview(requestBody, recordReviewReviewId);
-		Review reviewanonymousreview = ReviewFactory.createReview("Event.review.anonymousreview.ReviewImpl", review, anonymous);
+		boolean anonymous = parseBooleanValue(requestBody.get("anonymous"));
+		Review review = record.createReview(requestBody, id);
+		Review reviewanonymousreview = ReviewFactory.createReview("Event.review.anonymousreview.model.ReviewImpl", review, anonymous);
+		Repository.saveObject(reviewanonymousreview);
 		return reviewanonymousreview;
 	}
 
-    public HashMap<String, Object> updateReview(Map<String, Object> requestBody, int id){
-		String idStr = (String) requestBody.get("reviewId");
-		
-		Review reviewanonymousreview = Repository.getObject(id);
-		reviewanonymousreview = createReview(requestBody, id);
-		
+    public HashMap<String, Object> updateReview(Map<String, Object> requestBody){
+		int id = parseIntValue(requestBody.get("reviewId"), "reviewId");
+		Event.review.anonymousreview.model.ReviewImpl reviewanonymousreview = getAnonymousReviewObjectById(id);
+
+		reviewanonymousreview.setEventId(parseIntValue(requestBody.get("eventId"), "eventId"));
+		reviewanonymousreview.setAttendeeId(parseIntValue(requestBody.get("attendeeId"), "attendeeId"));
+		reviewanonymousreview.setRating(parseIntValue(requestBody.get("rating"), "rating"));
+		reviewanonymousreview.setComment((String) requestBody.get("comment"));
+		reviewanonymousreview.setAnonymous(parseBooleanValue(requestBody.get("anonymous")));
+
 		Repository.updateObject(reviewanonymousreview);
-		reviewanonymousreview = Repository.getObject(id);
-		
-		//to do: fix association attributes
 		
 		return reviewanonymousreview.toHashMap();
 	}
 
 	public HashMap<String, Object> getReview(String idStr){
-		int id = Integer.parseInt(idStr);
-		Review reviewanonymousreview = Repository.getObject(id);
+		int id = parseIntValue(idStr, "reviewId");
+		Review reviewanonymousreview = getAnonymousReviewObjectById(id);
 		return reviewanonymousreview.toHashMap();
 	}
 
 	public HashMap<String, Object> getReviewById(int id){
 		List<HashMap<String, Object>> reviewList = getAllReview();
 		for (HashMap<String, Object> review : reviewList){
-			int review_id = ((Double) review.get("reviewid")).intValue();
+			int review_id = ((Number) review.get("reviewId")).intValue();
 			if (review_id == id){
 				return review;
 			}
@@ -87,11 +76,52 @@ public class ReviewServiceImpl extends ReviewServiceDecorator {
 	}
 
     public List<HashMap<String,Object>> deleteReview(Map<String, Object> requestBody){
-		String idStr = ((String) requestBody.get("reviewId"));
-		int id = Integer.parseInt(idStr);
-		Repository.deleteObject(id);
+		record.deleteReview(requestBody);
 		return getAllReview();
 	}
 
+	private Event.review.anonymousreview.model.ReviewImpl getAnonymousReviewObjectById(int id) {
+		List<Review> list = Repository.getAllObject("review_anonymousreview");
+
+		for (Review review : list) {
+			if (review.getReviewId() == id) {
+				return (Event.review.anonymousreview.model.ReviewImpl) review;
+			}
+		}
+
+		throw new IllegalArgumentException("AnonymousReview not found for reviewId: " + id);
+	}
+
+	private int parseIntValue(Object value, String fieldName) {
+		if (value == null) {
+			throw new IllegalArgumentException(fieldName + " is required");
+		}
+
+		if (value instanceof Number) {
+			return ((Number) value).intValue();
+		}
+
+		if (value instanceof String) {
+			return Integer.parseInt((String) value);
+		}
+
+		throw new IllegalArgumentException("Invalid integer value for " + fieldName + ": " + value);
+	}
+
+	private boolean parseBooleanValue(Object value) {
+		if (value == null) {
+			throw new IllegalArgumentException("anonymous is required");
+		}
+
+		if (value instanceof Boolean) {
+			return (Boolean) value;
+		}
+
+		if (value instanceof String) {
+			return Boolean.parseBoolean((String) value);
+		}
+
+		throw new IllegalArgumentException("Invalid boolean value for anonymous: " + value);
+	}
 	
 }

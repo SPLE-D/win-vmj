@@ -52,23 +52,32 @@ public class ReviewResourceImpl extends ReviewResourceDecorator {
 	
     @Route(url="call/anonymousreview/update")
     public HashMap<String, Object> updateReview(VMJExchange vmjExchange){
-		Map<String, Object> requestBody = vmjExchange.getPayload(); 
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")){
 			return null;
 		}
+
+		Map<String, Object> requestBody = vmjExchange.getPayload();
 		return reviewanonymousreviewServiceImpl.updateReview(requestBody);
 	}
 
 	
     @Route(url="call/anonymousreview/detail")
     public HashMap<String, Object> getReview(VMJExchange vmjExchange){
-		return record.getReview(vmjExchange);
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+
+		String idStr = vmjExchange.getGETParam("reviewId");
+		return reviewanonymousreviewServiceImpl.getReview(idStr);
 	}
 
 	
     @Route(url="call/anonymousreview/list")
     public List<HashMap<String,Object>> getAllReview(VMJExchange vmjExchange){
-		Map<String, Object> requestBody = vmjExchange.getPayload();
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+
 		return reviewanonymousreviewServiceImpl.getAllReview();
 	}
 
@@ -84,10 +93,11 @@ public class ReviewResourceImpl extends ReviewResourceDecorator {
 	
     @Route(url="call/anonymousreview/delete")
     public List<HashMap<String,Object>> deleteReview(VMJExchange vmjExchange){
-		Map<String, Object> requestBody = vmjExchange.getPayload(); 
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
+
+		Map<String, Object> requestBody = vmjExchange.getPayload();
 		
 		return reviewanonymousreviewServiceImpl.deleteReview(requestBody);
 	}
