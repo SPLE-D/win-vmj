@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="review_comp")
@@ -22,6 +23,8 @@ public abstract class ReviewComponent implements Review{
 	protected int rating;
 	protected String comment;
 	protected String objectName = ReviewComponent.class.getName();
+	@Column(name = "modulesequence")
+	protected String moduleSequence;
 
 	public ReviewComponent() {
 
@@ -71,6 +74,13 @@ public abstract class ReviewComponent implements Review{
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	public String getModuleSequence() {
+		return this.moduleSequence;
+	}
+
+	public void setModuleSequence(String moduleSequence) {
+		this.moduleSequence = moduleSequence;
 	}
  
 

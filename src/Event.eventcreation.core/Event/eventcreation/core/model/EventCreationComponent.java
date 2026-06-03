@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="eventcreation_comp")
@@ -24,6 +25,8 @@ public abstract class EventCreationComponent implements EventCreation{
 	protected String name;
 	protected String location;
 	protected String objectName = EventCreationComponent.class.getName();
+	@Column(name = "modulesequence")
+	protected String moduleSequence;
 
 	public EventCreationComponent() {
 
@@ -81,6 +84,13 @@ public abstract class EventCreationComponent implements EventCreation{
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	public String getModuleSequence() {
+		return this.moduleSequence;
+	}
+
+	public void setModuleSequence(String moduleSequence) {
+		this.moduleSequence = moduleSequence;
 	}
  
 

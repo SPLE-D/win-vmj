@@ -230,6 +230,62 @@ const routes = {
 
 const cleanup = [];
 
+const moduleGroups = {
+  core: [
+    "eventcreation",
+    "report",
+    "review",
+    "checkin",
+    "attendeemanagement",
+    "notification",
+  ],
+  delta: [
+    "typeeventcreation",
+    "priorityreport",
+    "reviewanonymous",
+    "timestampcheckin",
+    "classattendeemanagement",
+    "targetednotification",
+  ],
+};
+
+moduleGroups.all = Object.keys(routes);
+
+function parseModules() {
+  const modulesArg =
+    process.argv.find((arg) => arg.startsWith("--modules="))?.split("=")[1]
+    ?? process.env.TEST_MODULES;
+
+  if (!modulesArg) {
+    console.log("No modules selected.");
+    console.log("Usage:");
+    console.log("  node tests/alldelta-crud.test.mjs --modules=typeeventcreation,reviewanonymous");
+    console.log("  node tests/alldelta-crud.test.mjs --modules=delta");
+    console.log("  node tests/alldelta-crud.test.mjs --modules=all");
+    console.log("");
+    console.log("Available modules:");
+    console.log(`  ${Object.keys(routes).join(", ")}`);
+    return [];
+  }
+
+  const selected = modulesArg
+    .split(",")
+    .map((item) => item.trim().toLowerCase())
+    .filter(Boolean)
+    .flatMap((item) => moduleGroups[item] ?? [item]);
+
+  const unique = [...new Set(selected)];
+
+  const invalid = unique.filter((name) => !routes[name]);
+  assert.equal(
+    invalid.length,
+    0,
+    `Unknown module(s): ${invalid.join(", ")}. Available: ${Object.keys(routes).join(", ")}`,
+  );
+
+  return unique;
+}
+
 function endpoint(path, action, query = undefined) {
   const url = new URL(`${BASE_URL.replace(/\/$/, "")}/call/${path}/${action}`);
   if (query) {
@@ -337,20 +393,50 @@ async function crud(name, ctx = {}) {
 
 async function withContext() {
   const suffix = `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+
   const event = await createRecord("eventcreation", `ctx-event-${suffix}`);
   const attendee = await createRecord("attendeemanagement", `ctx-attendee-${suffix}`);
+
   return {
     eventId: event.id,
     attendeeId: attendee.id,
   };
 }
 
+const testContexts = {
+  report: withContext,
+  priorityreport: withContext,
+  review: withContext,
+  reviewanonymous: withContext,
+};
+
+async function cleanupCreatedRecords() {
+  for (const item of cleanup.reverse()) {
+    try {
+      await deleteRecord(item.name, item.id);
+    } catch (cleanupError) {
+      console.error(`cleanup failed for ${item.name}#${item.id}:`, cleanupError.message);
+    }
+  }
+  cleanup.length = 0;
+}
+
 async function main() {
   await request("POST", "eventcreation", "list", {});
 
+  const selectedModules = parseModules();
+
+  if (selectedModules.length === 0) {
+    return;
+  }
+
+  console.log(`Running CRUD tests for: ${selectedModules.join(", ")}`);
+
   const failures = [];
 
-  async function runCase(name, makeContext = async () => ({})) {
+  async function runCase(name) {
+    const makeContext = testContexts[name] ?? (async () => ({}));
+
     try {
       await crud(name, await makeContext());
     } catch (error) {
@@ -360,47 +446,24 @@ async function main() {
     }
   }
 
-  await runCase("eventcreation");
-  await runCase("typeeventcreation");
-
-  await runCase("report", withContext);
-  await runCase("priorityreport", withContext);
-
-  await runCase("review", withContext);
-  await runCase("reviewanonymous", withContext);
-
-  await runCase("checkin");
-  await runCase("timestampcheckin");
-
-  await runCase("attendeemanagement");
-  await runCase("classattendeemanagement");
-
-  await runCase("notification");
-  await runCase("targetednotification");
-
-  for (const item of cleanup.reverse()) {
-    try {
-      await deleteRecord(item.name, item.id);
-    } catch (cleanupError) {
-      console.error(`cleanup failed for ${item.name}#${item.id}:`, cleanupError.message);
-    }
+  for (const name of selectedModules) {
+    await runCase(name);
   }
-  cleanup.length = 0;
+
+  await cleanupCreatedRecords();
 
   if (failures.length > 0) {
-    throw new Error(`${failures.length} CRUD test(s) failed: ${failures.map((failure) => failure.name).join(", ")}`);
+    throw new Error(
+      `${failures.length} CRUD test(s) failed: ${failures
+        .map((failure) => failure.name)
+        .join(", ")}`,
+    );
   }
 }
 
 main()
   .catch(async (error) => {
     console.error(error);
-    for (const item of cleanup.reverse()) {
-      try {
-        await deleteRecord(item.name, item.id);
-      } catch (cleanupError) {
-        console.error(`cleanup failed for ${item.name}#${item.id}:`, cleanupError.message);
-      }
-    }
+    await cleanupCreatedRecords();
     process.exitCode = 1;
   });

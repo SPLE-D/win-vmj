@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="report_comp")
@@ -22,6 +23,8 @@ public abstract class ReportComponent implements Report{
 	protected int totalRevenue;
 	protected String summary;
 	protected String objectName = ReportComponent.class.getName();
+	@Column(name = "modulesequence")
+	protected String moduleSequence;
 
 	public ReportComponent() {
 
@@ -71,6 +74,13 @@ public abstract class ReportComponent implements Report{
 
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+	public String getModuleSequence() {
+		return this.moduleSequence;
+	}
+
+	public void setModuleSequence(String moduleSequence) {
+		this.moduleSequence = moduleSequence;
 	}
  
 

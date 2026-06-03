@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="attendeemanagement_comp")
@@ -20,6 +21,8 @@ public abstract class AttendeeManagementComponent implements AttendeeManagement{
 	protected String phoneNumber;
 	protected String email;
 	protected String objectName = AttendeeManagementComponent.class.getName();
+	@Column(name = "modulesequence")
+	protected String moduleSequence;
 
 	public AttendeeManagementComponent() {
 
@@ -53,6 +56,13 @@ public abstract class AttendeeManagementComponent implements AttendeeManagement{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getModuleSequence() {
+		return this.moduleSequence;
+	}
+
+	public void setModuleSequence(String moduleSequence) {
+		this.moduleSequence = moduleSequence;
 	}
  
 

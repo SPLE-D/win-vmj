@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="checkin_comp")
@@ -19,6 +20,8 @@ public abstract class CheckInComponent implements CheckIn{
 	protected int checkInId; 
 	protected boolean attended;
 	protected String objectName = CheckInComponent.class.getName();
+	@Column(name = "modulesequence")
+	protected String moduleSequence;
 
 	public CheckInComponent() {
 
@@ -44,6 +47,13 @@ public abstract class CheckInComponent implements CheckIn{
 
 	public void setAttended(boolean attended) {
 		this.attended = attended;
+	}
+	public String getModuleSequence() {
+		return this.moduleSequence;
+	}
+
+	public void setModuleSequence(String moduleSequence) {
+		this.moduleSequence = moduleSequence;
 	}
  
 	public abstract boolean checkIn();

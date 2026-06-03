@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="notification_comp")
@@ -19,6 +20,8 @@ public abstract class NotificationComponent implements Notification{
 	protected int notifiationId; 
 	protected String content;
 	protected String objectName = NotificationComponent.class.getName();
+	@Column(name = "modulesequence")
+	protected String moduleSequence;
 
 	public NotificationComponent() {
 
@@ -44,6 +47,13 @@ public abstract class NotificationComponent implements Notification{
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getModuleSequence() {
+		return this.moduleSequence;
+	}
+
+	public void setModuleSequence(String moduleSequence) {
+		this.moduleSequence = moduleSequence;
 	}
  
 	public abstract boolean sendNotification();
