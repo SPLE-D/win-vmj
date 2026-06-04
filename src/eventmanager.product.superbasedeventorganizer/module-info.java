@@ -1,4 +1,4 @@
-module eventmanager.product.fneo {
+module eventmanager.product.superbasedeventorganizer {
     requires id.ac.ui.cs.prices.winvmj.auth;
     requires id.ac.ui.cs.prices.winvmj.auth.model;
     requires id.ac.ui.cs.prices.winvmj.core;
@@ -13,12 +13,10 @@ module eventmanager.product.fneo {
 
     requires Event.checkin.core;
     requires Event.eventcreation.core;
-    requires Event.eventcreation.typeeventcreation;
     requires Event.attendeemanagement.core;
     requires Event.notification.core;
     requires Event.report.core;
     requires Event.review.core;
-    requires Event.review.reviewanonymous;
 
 
 }

@@ -1,4 +1,4 @@
-package eventmanager.product.fneo;
+package eventmanager.product.superbasedeventorganizer;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -52,12 +52,12 @@ import Event.review.core.resource.ReviewResource;
 import Event.review.ReviewServiceFactory;
 import Event.review.core.service.ReviewService;
 
-public class Fneo {
+public class SuperBasedEventOrganizer {
 
 	private static final Logger logger;
 	
 	static {
-		logger = LoggerFactory.getLogger(Fneo.class);
+		logger = LoggerFactory.getLogger(SuperBasedEventOrganizer.class);
 	}
     
 	public static void main(String[] args) {
@@ -103,8 +103,6 @@ public class Fneo {
 		configuration.addAnnotatedClass(Event.eventcreation.core.model.EventCreationComponent.class);
 		configuration.addAnnotatedClass(Event.eventcreation.core.model.EventCreationDecorator.class);
 		configuration.addAnnotatedClass(Event.eventcreation.core.model.EventCreationImpl.class);
-		configuration.addAnnotatedClass(Event.eventcreation.typeeventcreation.model.EventCreationImpl.class);
-		configuration.addAnnotatedClass(Event.eventcreation.typeeventcreation.model.EventType.class);
 		configuration.addAnnotatedClass(Event.attendeemanagement.core.model.AttendeeManagement.class);
 		configuration.addAnnotatedClass(Event.attendeemanagement.core.model.AttendeeManagementComponent.class);
 		configuration.addAnnotatedClass(Event.attendeemanagement.core.model.AttendeeManagementDecorator.class);
@@ -121,7 +119,6 @@ public class Fneo {
 		configuration.addAnnotatedClass(Event.review.core.model.ReviewComponent.class);
 		configuration.addAnnotatedClass(Event.review.core.model.ReviewDecorator.class);
 		configuration.addAnnotatedClass(Event.review.core.model.ReviewImpl.class);
-		configuration.addAnnotatedClass(Event.review.reviewanonymous.model.ReviewImpl.class);
 
 		Map<String, Object> featureModelMappings = mappingFeatureModel();
 		Gson gson = new Gson();
@@ -183,14 +180,6 @@ public class Fneo {
             .createEventCreationResource("Event.eventcreation.core.resource.EventCreationResourceImpl"
                 );
 			
-        EventCreationService typeeventcreationEventCreation2Service = EventCreationServiceFactory
-            .createEventCreationService("Event.eventcreation.typeeventcreation.service.EventCreationServiceImpl"
-            	, eventcreationEventCreation2Service);		
-
-        EventCreationResource typeeventcreationEventCreation2Resource = EventCreationResourceFactory
-            .createEventCreationResource("Event.eventcreation.typeeventcreation.resource.EventCreationResourceImpl"
-                , eventcreationEventCreation2Resource, eventcreationEventCreation2Service);
-			
         AttendeeManagementService attendeemanagementAttendeeManagement2Service = AttendeeManagementServiceFactory
             .createAttendeeManagementService("Event.attendeemanagement.core.service.AttendeeManagementServiceImpl"
             	);		
@@ -223,21 +212,7 @@ public class Fneo {
             .createReviewResource("Event.review.core.resource.ReviewResourceImpl"
                 );
 			
-        ReviewService reviewanonymousReview2Service = ReviewServiceFactory
-            .createReviewService("Event.review.reviewanonymous.service.ReviewServiceImpl"
-            	, reviewReview2Service);		
 
-        ReviewResource reviewanonymousReview2Resource = ReviewResourceFactory
-            .createReviewResource("Event.review.reviewanonymous.resource.ReviewResourceImpl"
-                , reviewReview2Resource, reviewReview2Service);
-			
-
-		logger.info("Binding endpoints for reviewanonymousReview2Resource");
-		Router.route(reviewanonymousReview2Resource);
-		
-		logger.info("Binding endpoints for reviewanonymousReview2Service");
-		Router.route(reviewanonymousReview2Service);
-		
 		logger.info("Binding endpoints for reviewReview2Resource");
 		Router.route(reviewReview2Resource);
 		
@@ -261,12 +236,6 @@ public class Fneo {
 		
 		logger.info("Binding endpoints for attendeemanagementAttendeeManagement2Service");
 		Router.route(attendeemanagementAttendeeManagement2Service);
-		
-		logger.info("Binding endpoints for typeeventcreationEventCreation2Resource");
-		Router.route(typeeventcreationEventCreation2Resource);
-		
-		logger.info("Binding endpoints for typeeventcreationEventCreation2Service");
-		Router.route(typeeventcreationEventCreation2Service);
 		
 		logger.info("Binding endpoints for eventcreationEventCreation2Resource");
 		Router.route(eventcreationEventCreation2Resource);
@@ -305,7 +274,6 @@ public class Fneo {
 					Event.eventcreation.core.model.EventCreationComponent.class.getName()
 				});
 				put("deltas", new String[] {
-					Event.eventcreation.typeeventcreation.model.EventCreationImpl.class.getName()
 				});
 			}});
 		featureModelMappings.put(
@@ -342,7 +310,6 @@ public class Fneo {
 					Event.review.core.model.ReviewComponent.class.getName()
 				});
 				put("deltas", new String[] {
-					Event.review.reviewanonymous.model.ReviewImpl.class.getName()
 				});
 			}});
 		featureModelMappings.put(
