@@ -1,0 +1,25 @@
+namespace EventManager
+
+features
+	EventManager
+		mandatory
+			Report
+				optional
+					PriorityReport
+			Review
+				optional
+					AnonymousReview
+			CheckIn
+				optional
+					TimeStampCheckIn
+			EventCreation
+				optional
+					TypeEventCreation
+			AttendeeManagement
+				optional
+					ClassAttendeeManagement
+		optional
+			Notification
+				optional
+					TargetedNotification
+

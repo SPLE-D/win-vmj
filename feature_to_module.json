@@ -1,0 +1,38 @@
+{
+    "CheckIn": [
+        "Event.checkin.core"
+    ],
+    "TimeStampCheckIn": [
+        "Event.checkin.timestampcheckin"
+    ],
+    "EventCreation": [
+        "Event.eventcreation.core"
+    ],
+    "TypeEventCreation": [
+        "Event.eventcreation.typeeventcreation"
+    ],
+    "AttendeeManagement": [
+        "Event.attendeemanagement.core"
+    ],
+    "ClassAttendeeManagement": [
+        "Event.attendeemanagement.classattendeemanagement"
+    ],
+    "Notification": [
+        "Event.notification.core"
+    ],
+    "TargetedNotification": [
+        "Event.notification.targetednotification"
+    ],
+    "Report": [
+        "Event.report.core"
+    ],
+    "PriorityReport": [
+        "Event.report.priorityreport"
+    ],
+    "Review": [
+        "Event.review.core"
+    ],
+    "AnonymousReview": [
+        "Event.review.reviewanonymous"
+    ]
+}
