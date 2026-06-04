@@ -2,7 +2,7 @@
 INSERT INTO checkin_comp (checkinid, attended, objectname, modulesequence)
 SELECT
   400000 + n,
-  n % 2 = 0,
+  n % 3 != 0,
   'Event.checkin.core.model.CheckInComponent',
   'checkin_impl'
 FROM generate_series(1, 10) AS n

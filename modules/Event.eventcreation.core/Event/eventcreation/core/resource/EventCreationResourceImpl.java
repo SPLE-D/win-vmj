@@ -4,6 +4,7 @@ import java.util.*;
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 import Event.eventcreation.EventCreationFactory;
 import Event.eventcreation.core.model.EventCreation;
 import Event.eventcreation.core.service.EventCreationServiceImpl;
@@ -15,6 +16,7 @@ public class EventCreationResourceImpl extends EventCreationResourceComponent{
 	private EventCreationServiceImpl eventcreationServiceImpl = new EventCreationServiceImpl();
 
 	
+    @Restricted(permissionName="CreateEventCreation")
     @Route(url="call/eventcreation/save")
     public List<HashMap<String,Object>> saveEventCreation(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
@@ -43,6 +45,7 @@ public class EventCreationResourceImpl extends EventCreationResourceComponent{
 	}
 
 	
+    @Restricted(permissionName="UpdateEventCreation")
     @Route(url="call/eventcreation/update")
     public HashMap<String, Object> updateEventCreation(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -68,6 +71,7 @@ public class EventCreationResourceImpl extends EventCreationResourceComponent{
 	}
 
 	
+    @Restricted(permissionName="DeleteEventCreation")
     @Route(url="call/eventcreation/delete")
     public List<HashMap<String,Object>> deleteEventCreation(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 

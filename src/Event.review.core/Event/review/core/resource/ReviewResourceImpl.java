@@ -4,6 +4,7 @@ import java.util.*;
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 import Event.review.ReviewFactory;
 import Event.review.core.model.Review;
 import Event.review.core.service.ReviewServiceImpl;
@@ -15,6 +16,7 @@ public class ReviewResourceImpl extends ReviewResourceComponent{
 	private ReviewServiceImpl reviewServiceImpl = new ReviewServiceImpl();
 
 	
+    @Restricted(permissionName="CreateReview")
     @Route(url="call/review/save")
     public List<HashMap<String,Object>> saveReview(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
@@ -43,6 +45,7 @@ public class ReviewResourceImpl extends ReviewResourceComponent{
 	}
 
 	
+    @Restricted(permissionName="UpdateReview")
     @Route(url="call/review/update")
     public HashMap<String, Object> updateReview(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -68,6 +71,7 @@ public class ReviewResourceImpl extends ReviewResourceComponent{
 	}
 
 	
+    @Restricted(permissionName="DeleteReview")
     @Route(url="call/review/delete")
     public List<HashMap<String,Object>> deleteReview(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 

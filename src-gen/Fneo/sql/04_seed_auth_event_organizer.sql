@@ -65,14 +65,14 @@ INSERT INTO auth_role_impl (id, name, allowedPermissions)
 VALUES (
   'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',
   'Event Organizer',
-  'home,CreateEventCreation,UpdateEventCreation,DeleteEventCreation,CreateTypeEventCreation,UpdateTypeEventCreation,DeleteTypeEventCreation,CreateReport,UpdateReport,DeleteReport'
+  'home,CreateEventCreation,UpdateEventCreation,DeleteEventCreation,CreateTypeEventCreation,UpdateTypeEventCreation,DeleteTypeEventCreation,CreateReport,UpdateReport,DeleteReport,CreateNotification,UpdateNotification,DeleteNotification'
 ) ON CONFLICT DO NOTHING;
 
 INSERT INTO auth_role_impl (id, name, allowedPermissions)
 VALUES (
   'cccccccc-cccc-4ccc-8ccc-cccccccccccc',
   'Check-in Staff',
-  'home,CreateCheckIn,UpdateCheckIn,DeleteCheckIn'
+  'home,CreateCheckIn,UpdateCheckIn,DeleteCheckIn,CreateAttendeeManagement,UpdateAttendeeManagement,DeleteAttendeeManagement'
 ) ON CONFLICT DO NOTHING;
 
 INSERT INTO auth_role_impl (id, name, allowedPermissions)

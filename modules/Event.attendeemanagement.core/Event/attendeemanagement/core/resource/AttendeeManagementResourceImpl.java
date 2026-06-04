@@ -4,6 +4,7 @@ import java.util.*;
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 import Event.attendeemanagement.AttendeeManagementFactory;
 import Event.attendeemanagement.core.model.AttendeeManagement;
 import Event.attendeemanagement.core.service.AttendeeManagementServiceImpl;
@@ -15,6 +16,7 @@ public class AttendeeManagementResourceImpl extends AttendeeManagementResourceCo
 	private AttendeeManagementServiceImpl attendeemanagementServiceImpl = new AttendeeManagementServiceImpl();
 
 	
+    @Restricted(permissionName="CreateAttendeeManagement")
     @Route(url="call/attendeemanagement/save")
     public List<HashMap<String,Object>> saveAttendeeManagement(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
@@ -43,6 +45,7 @@ public class AttendeeManagementResourceImpl extends AttendeeManagementResourceCo
 	}
 
 	
+    @Restricted(permissionName="UpdateAttendeeManagement")
     @Route(url="call/attendeemanagement/update")
     public HashMap<String, Object> updateAttendeeManagement(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -68,6 +71,7 @@ public class AttendeeManagementResourceImpl extends AttendeeManagementResourceCo
 	}
 
 	
+    @Restricted(permissionName="DeleteAttendeeManagement")
     @Route(url="call/attendeemanagement/delete")
     public List<HashMap<String,Object>> deleteAttendeeManagement(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 

@@ -5,6 +5,7 @@ import java.lang.*;
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 
 import Event.checkin.core.resource.CheckInResourceDecorator;
 import Event.checkin.core.resource.CheckInResourceComponent;
@@ -22,6 +23,7 @@ public class CheckInResourceImpl extends CheckInResourceDecorator {
     }
 
     
+    @Restricted(permissionName="CreateTimeStampCheckIn")
     @Route(url="call/timestampcheckin/save")
     public List<HashMap<String,Object>> saveCheckIn(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
@@ -50,6 +52,7 @@ public class CheckInResourceImpl extends CheckInResourceDecorator {
 	}
 
 	
+    @Restricted(permissionName="UpdateTimeStampCheckIn")
     @Route(url="call/timestampcheckin/update")
     public HashMap<String, Object> updateCheckIn(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -82,6 +85,7 @@ public class CheckInResourceImpl extends CheckInResourceDecorator {
 	}
 
 	
+    @Restricted(permissionName="DeleteTimeStampCheckIn")
     @Route(url="call/timestampcheckin/delete")
     public List<HashMap<String,Object>> deleteCheckIn(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 

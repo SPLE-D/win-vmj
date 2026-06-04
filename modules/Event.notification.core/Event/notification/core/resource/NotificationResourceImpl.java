@@ -4,6 +4,7 @@ import java.util.*;
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 import Event.notification.NotificationFactory;
 import Event.notification.core.model.Notification;
 import Event.notification.core.service.NotificationServiceImpl;
@@ -15,6 +16,7 @@ public class NotificationResourceImpl extends NotificationResourceComponent{
 	private NotificationServiceImpl notificationServiceImpl = new NotificationServiceImpl();
 
 	
+    @Restricted(permissionName="CreateNotification")
     @Route(url="call/notification/save")
     public List<HashMap<String,Object>> saveNotification(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
@@ -43,6 +45,7 @@ public class NotificationResourceImpl extends NotificationResourceComponent{
 	}
 
 	
+    @Restricted(permissionName="UpdateNotification")
     @Route(url="call/notification/update")
     public HashMap<String, Object> updateNotification(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -68,6 +71,7 @@ public class NotificationResourceImpl extends NotificationResourceComponent{
 	}
 
 	
+    @Restricted(permissionName="DeleteNotification")
     @Route(url="call/notification/delete")
     public List<HashMap<String,Object>> deleteNotification(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 

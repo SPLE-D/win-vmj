@@ -5,6 +5,7 @@ import java.lang.*;
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 
 import Event.report.core.resource.ReportResourceDecorator;
 import Event.report.core.resource.ReportResourceComponent;
@@ -22,6 +23,7 @@ public class ReportResourceImpl extends ReportResourceDecorator {
     }
 
     
+    @Restricted(permissionName="CreatePriorityReport")
     @Route(url="call/priorityreport/save")
     public List<HashMap<String,Object>> saveReport(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
@@ -50,6 +52,7 @@ public class ReportResourceImpl extends ReportResourceDecorator {
 	}
 
 	
+    @Restricted(permissionName="UpdatePriorityReport")
     @Route(url="call/priorityreport/update")
     public HashMap<String, Object> updateReport(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -82,6 +85,7 @@ public class ReportResourceImpl extends ReportResourceDecorator {
 	}
 
 	
+    @Restricted(permissionName="DeletePriorityReport")
     @Route(url="call/priorityreport/delete")
     public List<HashMap<String,Object>> deleteReport(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 

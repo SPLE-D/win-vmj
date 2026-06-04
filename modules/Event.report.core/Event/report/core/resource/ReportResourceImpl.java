@@ -4,6 +4,7 @@ import java.util.*;
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 import Event.report.ReportFactory;
 import Event.report.core.model.Report;
 import Event.report.core.service.ReportServiceImpl;
@@ -15,6 +16,7 @@ public class ReportResourceImpl extends ReportResourceComponent{
 	private ReportServiceImpl reportServiceImpl = new ReportServiceImpl();
 
 	
+    @Restricted(permissionName="CreateReport")
     @Route(url="call/report/save")
     public List<HashMap<String,Object>> saveReport(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
@@ -43,6 +45,7 @@ public class ReportResourceImpl extends ReportResourceComponent{
 	}
 
 	
+    @Restricted(permissionName="UpdateReport")
     @Route(url="call/report/update")
     public HashMap<String, Object> updateReport(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -68,6 +71,7 @@ public class ReportResourceImpl extends ReportResourceComponent{
 	}
 
 	
+    @Restricted(permissionName="DeleteReport")
     @Route(url="call/report/delete")
     public List<HashMap<String,Object>> deleteReport(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 

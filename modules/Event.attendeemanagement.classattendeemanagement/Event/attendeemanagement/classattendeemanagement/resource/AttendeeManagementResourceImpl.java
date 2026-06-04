@@ -5,6 +5,7 @@ import java.lang.*;
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
+import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 
 import Event.attendeemanagement.core.resource.AttendeeManagementResourceDecorator;
 import Event.attendeemanagement.core.resource.AttendeeManagementResourceComponent;
@@ -22,6 +23,7 @@ public class AttendeeManagementResourceImpl extends AttendeeManagementResourceDe
     }
 
     
+    @Restricted(permissionName="CreateClassAttendeeManagement")
     @Route(url="call/classattendeemanagement/save")
     public List<HashMap<String,Object>> saveAttendeeManagement(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
@@ -50,6 +52,7 @@ public class AttendeeManagementResourceImpl extends AttendeeManagementResourceDe
 	}
 
 	
+    @Restricted(permissionName="UpdateClassAttendeeManagement")
     @Route(url="call/classattendeemanagement/update")
     public HashMap<String, Object> updateAttendeeManagement(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -82,6 +85,7 @@ public class AttendeeManagementResourceImpl extends AttendeeManagementResourceDe
 	}
 
 	
+    @Restricted(permissionName="DeleteClassAttendeeManagement")
     @Route(url="call/classattendeemanagement/delete")
     public List<HashMap<String,Object>> deleteAttendeeManagement(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
