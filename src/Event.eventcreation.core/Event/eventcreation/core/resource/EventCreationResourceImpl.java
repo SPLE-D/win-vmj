@@ -8,7 +8,7 @@ import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
 import Event.eventcreation.EventCreationFactory;
 import Event.eventcreation.core.model.EventCreation;
 import Event.eventcreation.core.service.EventCreationServiceImpl;
-import id.ac.ui.cs.prices.winvmj.*;
+import id.ac.ui.cs.prices.winvmj.core.Restricted;
 //add other required packages
 
 

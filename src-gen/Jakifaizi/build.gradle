@@ -5,7 +5,7 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -27,6 +27,7 @@ dependencies {
     implementation 'id.ac.ui.cs.prices.winvmj:hibernate:1.2.0'
     implementation 'id.ac.ui.cs.prices.winvmj:auth:1.2.2'
     implementation 'id.ac.ui.cs.prices.winvmj:auth.model:1.2.2'
+    implementation fileTree(dir: 'eventmanager.product.jakifaizi', include: ['**/*.jar'])
     implementation fileTree(dir: 'libs', include: ['**/*.jar'])
     implementation 'javax.persistence:javax.persistence-api:2.2'
     implementation 'com.google.code.gson:gson:2.10.1'
@@ -47,7 +48,7 @@ dependencies {
 def jarsDirFile = file('eventmanager.product.jakifaizi')
 def jarFile = file('eventmanager.product.jakifaizi/Jakifaizi.jar')
 def jf = new java.util.jar.JarFile(jarFile)
-def mainCls = jf.manifest?.mainAttributes?.getValue('Main-Class')
+def mainCls = 'eventmanager.product.jakifaizi.JakifaiziPriorityRunner'
 
 task copyDependencies(type: Copy) {
     group = 'docker'
@@ -168,19 +169,14 @@ tasks.register("runWinVMJ", JavaExec) {
     group = 'application'
     dependsOn loadSql
     mainClass.set(mainCls)
-    classpath = files(jarFile)
-    classpath.from fileTree(dir: jarsDirFile, include: ['**/*.jar'])
-    classpath.from fileTree(dir: 'libs', include: ['**/*.jar'])
+    classpath = sourceSets.main.runtimeClasspath
     classpath.from files(project.projectDir)
-    classpath.from configurations.runtimeClasspath
 }
 
 tasks.register("runWinVMJNoSQL", JavaExec) {
     group = 'application'
+    dependsOn classes
     mainClass.set(mainCls)
-    classpath = files(jarFile)
-    classpath.from fileTree(dir: jarsDirFile, include: ['**/*.jar'])
-    classpath.from fileTree(dir: 'libs', include: ['**/*.jar'])
+    classpath = sourceSets.main.runtimeClasspath
     classpath.from files(project.projectDir)
-    classpath.from configurations.runtimeClasspath
 }

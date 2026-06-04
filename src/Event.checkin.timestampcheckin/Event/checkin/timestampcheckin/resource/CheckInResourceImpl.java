@@ -13,7 +13,7 @@ import Event.checkin.core.model.CheckIn;
 import Event.checkin.core.model.CheckInImpl;
 import Event.checkin.core.service.CheckInServiceComponent;
 import Event.checkin.timestampcheckin.service.CheckInServiceImpl;
-import id.ac.ui.cs.prices.winvmj.*;
+import id.ac.ui.cs.prices.winvmj.core.Restricted;
 
 public class CheckInResourceImpl extends CheckInResourceDecorator {
 	private CheckInServiceComponent checkintimestampcheckinServiceImpl;
